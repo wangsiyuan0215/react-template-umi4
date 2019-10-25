@@ -1,0 +1,5 @@
+**/*.md
+**/*.svg
+**/*.html
+.umi
+.umi-production

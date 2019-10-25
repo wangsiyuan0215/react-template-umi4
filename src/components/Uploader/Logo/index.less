@@ -1,0 +1,71 @@
+/*
+ * @Author: SiYuan Wang
+ * @Date: 2019-03-21 10:46:31
+ * @Description: styles for Uploader.Logo
+ */
+.logoUploadContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    line-height: 0;
+}
+.logoUploadInput {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    opacity: 0;
+}
+.logoUploadLoading {
+    font-size: 0;
+
+    .deleteWrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        margin-left: -15px;
+        background-color: rgba(0, 0, 0, 0.5);
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        cursor: pointer;
+
+        .icon__delete {
+            color: white;
+            font-size: 16px;
+        }
+    }
+
+    &:hover .deleteWrapper {
+        display: flex;
+    }
+}
+.logoUploadBtn {
+    position: relative;
+    display: inline-block;
+    flex: 0 0 60px;
+    width: 60px;
+    overflow: hidden;
+    padding: 0 0 60px;
+    border: none;
+    background-color: #eee;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    & > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+}

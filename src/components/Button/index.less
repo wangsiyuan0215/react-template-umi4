@@ -1,0 +1,27 @@
+/*
+ * @Author: siyuan.wang
+ * @Date: 2019-03-10 20:39:32
+ * @Last Modified by: siyuan.wang
+ * @Last Modified time: 2019-03-10 21:12:37
+ */
+
+.flexStretch() {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+.container {
+    .flexStretch;
+    overflow: hidden;
+}
+.loadingWrapper {
+    &:extend(.container);
+
+    /* hack here for CSS in Module */
+    & > div {
+        flex: 1 1 auto;
+        &:extend(.container);
+    }
+}

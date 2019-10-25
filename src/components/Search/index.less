@@ -1,0 +1,36 @@
+/*
+ * @Author: SiYuan Wang
+ * @Date: 2019-03-29 13:53:01
+ * @Description: styles for search
+ */
+
+.searchContainer {
+    padding: 0 30px;
+
+    :global(.ant-form-item-label) {
+        width: auto;
+        text-align: left;
+    }
+    :global(.ant-form-item-control) {
+        width: auto;
+        //max-width: 136px;
+    }
+    :global {
+        .ant-row {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    }
+    :global(.ant-form-item) {
+        flex: 0 1 auto;
+        margin-right: 20px;
+    }
+
+    .btnsContainer {
+        flex: 0 0 auto;
+        float: right;
+        margin-bottom: 24px;
+    }
+}
