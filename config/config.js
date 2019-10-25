@@ -8,15 +8,15 @@ import path from "path";
 import routes from './routes.config';
 
 const apiPrefixedUrl = {
-    test: 'app-test.ntmyinc.com',
-    production: 'app.ntmyinc.com',
-    development: 'app-test.ntmyinc.com'
+    dev: 'app-dev.url.com',
+    test: 'app-test.url.com',
+    prod: 'app-prod.url.com'
 };
 
 const apiProtocol = {
+    dev: 'http',
     test: 'http',
-    production: 'https',
-    development: 'http'
+    prod: 'https'
 };
 
 export default {
