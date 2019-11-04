@@ -22,8 +22,7 @@
         "lint-staged:js": "eslint --ext .js",
         "test": "umi test",
         "test:component": "umi test ./src/components",
-        "test:all": "node ./tests/run-tests.js",
-        "prettier": "node ./scripts/prettier.js"
+        "test:all": "node ./tests/run-tests.js"
     },
     "dependencies": {
         "ant-design-pro": "2.3.2",
