@@ -8,15 +8,16 @@
 @font: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Microsoft Yahei', sans-serif;
 
 @blackColor: black;
+
 @darkBlueColor: #245dc1;
 @lightBlueColor: #538fff;
 
+@darkGrayColor: #aaa;
 @lightGrayColor: #eee;
 @mediumGrayColor: #e8e8e8;
-@darkGrayColor: #aaa;
 
-@lightRedColor: #ff6a6a;
 @darkRedColor: #cb4d4d;
+@lightRedColor: #ff6a6a;
 
 // color, font-size, line-height
 .cf (@color: #fff, @fs: 16px) {
@@ -28,7 +29,6 @@
     font-size: @fs;
     line-height: @lh;
 }
-
 .linear-gradient(@deg, @colorForm, @colorTo) {
     background: @colorForm;
     background: -webkit-linear-gradient(@deg, @colorForm, @colorTo);
