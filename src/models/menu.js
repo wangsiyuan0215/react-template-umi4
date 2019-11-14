@@ -64,11 +64,13 @@ const filterMenuData = menuData => {
     if (!menuData) {
         return [];
     }
-    return menuData
-        /** @param item {{hideInMenu: boolean}} */
-        .filter(item => item.name && !item.hideInMenu)
-        .map(item => check(item.authority, getSubMenu(item)))
-        .filter(item => item);
+    return (
+        menuData
+            /** @param item {{hideInMenu: boolean}} */
+            .filter(item => item.name && !item.hideInMenu)
+            .map(item => check(item.authority, getSubMenu(item)))
+            .filter(item => item)
+    );
 };
 /**
  * 获取面包屑映射
@@ -105,23 +107,24 @@ export default {
         /**
          * 根据 authority 获取当前权限下的菜单数据
          *
+         * @param _
          * @param payload
          * @param put
          * @returns {IterableIterator<*>}
          */
-        *getMenuData({ payload }, { put }) {
+        *getMenuData(_, { payload }, { put }) {
             const { routes, authority } = payload;
             const allMenuData = memoizeOneFormatter(routes, authority);
             const menuData = filterMenuData(allMenuData);
             const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(menuData);
             yield put({
-                type: 'save',
+                type: 'receive',
                 payload: { menuData, allMenuData, breadcrumbNameMap }
             });
         }
     },
     reducers: {
-        save(state, action) {
+        receive(state, action) {
             return {
                 ...state,
                 ...action.payload

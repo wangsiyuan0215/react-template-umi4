@@ -17,14 +17,14 @@ module.exports = {
             services: require('path').resolve(__dirname, 'src/services'),
             resources: require('path').resolve(__dirname, 'src/resources'),
             components: require('path').resolve(__dirname, 'src/components'),
-            '_.less': require('path').resolve(__dirname, 'src/resources/_.less'),
-        }
+            '_.less': require('path').resolve(__dirname, 'src/resources/_.less')
+        },
+        extensions: ['less', 'js', 'jsx']
     },
     modules: [
         'node_modules',
         require('path').resolve(__dirname, 'src'),
         require('path').resolve(__dirname, 'src/assets'),
-        require('path').resolve(__dirname, 'src/resources'),
-        require('path').resolve(__dirname, 'src/assets/styles')
+        require('path').resolve(__dirname, 'src/resources')
     ]
 };

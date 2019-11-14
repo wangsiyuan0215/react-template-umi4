@@ -6,15 +6,19 @@
 
 export default [
     {
-        path: '/login',
-        component: '../layouts/pure/index',
-        // routes: [{ path: '/login', component: './login' }]
-    },
-    {
         path: '/',
-        component: '../layouts/basic/index',
-        Routes: ['src/components/Authorized/index'],
+        component: '../layouts/Default/index',
+        Routes: ['src/components/Common/Authorized/index'],
         routes: [
+            {
+                path: '/',
+                redirect: '/home'
+            },
+            {
+                path: '/home',
+                name: 'home',
+                component: './home'
+            },
             {
                 path: '/exception/403',
                 hideInMenu: true,
