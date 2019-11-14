@@ -5,30 +5,34 @@
  */
 
 import React from 'react';
-import Media from 'react-media';
 import DocumentTitle from 'react-document-title';
+import { ContainerQuery } from 'react-container-query';
+
+import constant from '@/resources/constant';
 
 import Footer from './Footer';
-
 import styles from './index.less';
 
+const { containerQueries } = constant;
+
+/* eslint no-unused-vars: 0 */
 const PureLayout = props => {
     const getPageTitle = () => 'Login -  NtMY';
     const { children } = props;
     return (
-        <DocumentTitle title={getPageTitle()}>
-            <div className={styles.container}>
-                {children}
-                <section className={styles.footerContainer}>
-                    <Footer />
-                </section>
-            </div>
-        </DocumentTitle>
+        <ContainerQuery query={containerQueries}>
+            {({ isMobile = false }) => (
+                <DocumentTitle title={getPageTitle()}>
+                    <div className={styles.container}>
+                        {children}
+                        <section className={styles.footerContainer}>
+                            <Footer />
+                        </section>
+                    </div>
+                </DocumentTitle>
+            )}
+        </ContainerQuery>
     );
 };
 
-export default props => (
-    <Media query="(max-width: 599px)">
-        {isMobile => <PureLayout {...props} isMobile={isMobile} />}
-    </Media>
-);
+export default PureLayout;

@@ -3,7 +3,7 @@
  * @Date: 2019-03-11 14:14:16
  * @Description: global model for common effects
  */
-import config from '@/resources/constance';
+import config from '@/resources/constant';
 import umiRouter from 'umi/router';
 import { getAuthority, getStorageForSomething } from '@/utils/storage';
 

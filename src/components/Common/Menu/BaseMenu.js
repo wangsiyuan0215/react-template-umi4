@@ -1,12 +1,19 @@
-import React, { PureComponent } from 'react';
+/*
+ * @Author: SiYuan Wang
+ * @Date: 2019-11-14 18:51:58
+ * @Description: BaseMenu
+ */
+import Link from 'umi/link';
 import classNames from 'classnames';
 import { Menu, Icon } from 'antd';
-import Link from 'umi/link';
-import CustomIcon from '@/components/Common/CustomIcon';
-import { urlToList } from './_utils/pathTools';
-import { getMenuMatches } from './SiderMenuUtils';
+import React, { PureComponent } from 'react';
+
 import { isUrl } from '@/utils/utils';
+import CustomIcon from '@/components/Common/CustomIcon';
+
 import styles from './index.less';
+import { urlToList } from './_utils/pathTools';
+import { getMenuMatches } from './MenuUtils';
 
 const { SubMenu } = Menu;
 

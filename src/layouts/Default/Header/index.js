@@ -15,11 +15,11 @@ const { Header: HeaderWrapper } = Layout;
 const Header = props => (
     <HeaderWrapper
         style={{
-            padding: 0,
-            width: 'calc(100% - 226px)',
             position: 'fixed',
             top: 0,
-            zIndex: 100
+            zIndex: 100,
+            width: 'calc(100% - 226px)',
+            padding: 0
         }}
     >
         <HeaderComponent {...props} />

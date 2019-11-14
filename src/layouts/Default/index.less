@@ -1,11 +1,25 @@
 @import '../../../node_modules/antd/lib/style/themes/default.less';
 
 .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
     height: 100%;
     overflow: hidden;
 
     .container__inner {
         padding-top: 64px;
+    }
+}
+.container--mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    .container__inner {
+        padding-top: 0;
     }
 }
 .content {

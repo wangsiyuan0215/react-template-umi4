@@ -17,5 +17,11 @@ export default {
         INFO: 'info',
         ERROR: 'error',
         SUCCESS: 'success'
+    },
+    containerQueries: {
+        isMobile: {
+            minWidth: 375,
+            maxWidth: 768
+        }
     }
 };

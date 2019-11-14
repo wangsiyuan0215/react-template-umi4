@@ -4,7 +4,7 @@
 import { curry } from 'ramda';
 import { notification } from 'antd';
 
-import constance from '@/resources/constance';
+import constance from '@/resources/constant';
 
 const { errorTypes } = constance;
 

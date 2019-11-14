@@ -3,9 +3,9 @@
  * @Date: 2019-03-11 21:39:55
  * @Description: storage utils
  */
-import config from '@/resources/constance';
+import constant from '@/resources/constant';
 
-export const getStorageForSomething = (key, where = config.storageWhere.rememberMe) => {
+export const getStorageForSomething = (key, where = constant.storageWhere.rememberMe) => {
     const finalValue = window[where].getItem(key);
     try {
         return JSON.parse(finalValue);
@@ -14,18 +14,18 @@ export const getStorageForSomething = (key, where = config.storageWhere.remember
     }
 };
 
-export const setStorageForSomething = (key, value, where = config.storageWhere.rememberMe) => {
+export const setStorageForSomething = (key, value, where = constant.storageWhere.rememberMe) => {
     const finalValue = typeof value !== 'string' ? JSON.stringify(value || '') : value;
     window[where].setItem(key, finalValue);
 };
 
-export const removeStorageForSomething = (key, where = config.storageWhere.rememberMe) => {
+export const removeStorageForSomething = (key, where = constant.storageWhere.rememberMe) => {
     window[where].removeItem(key);
 };
 
 export function getAuthority(str) {
     const authorityString =
-        typeof str === 'undefined' ? localStorage.getItem(config.storage.originAuthority) : str;
+        typeof str === 'undefined' ? localStorage.getItem(constant.storage.originAuthority) : str;
     // authorityString could be admin, "admin", ["admin"]
     let authority;
     try {
@@ -41,5 +41,5 @@ export function getAuthority(str) {
 
 export function setAuthority(authority) {
     const proAuthority = typeof authority === 'string' ? [authority] : authority;
-    return localStorage.setItem(config.storage.originAuthority, JSON.stringify(proAuthority));
+    return localStorage.setItem(constant.storage.originAuthority, JSON.stringify(proAuthority));
 }

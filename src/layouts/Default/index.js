@@ -5,15 +5,18 @@
  */
 
 import equals from 'ramda/src/equals';
+import classNames from 'classnames';
 import memoizeOne from 'memoize-one';
 import { Layout } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import DocumentTitle from 'react-document-title';
 import { formatMessage } from 'umi-plugin-react/locale';
+import { ContainerQuery } from 'react-container-query';
 import React, { createContext } from 'react';
 
-// import Logo from '@/assets/logo@2x.png';
-import SiderMenu from '@/components/Common/SiderMenu';
+import Logo from '@/assets/logo@2x.png';
+import Menu from '@/components/Common/Menu';
+import constant from '@/resources/constant';
 import BreadcrumbHOF from '@/HOFs/layouts/BreadcrumbHOF';
 import DefaultLayoutHOF from '@/HOFs/layouts/DefaultHOF';
 
@@ -26,6 +29,8 @@ const { Content } = Layout;
 
 const Bread = BreadcrumbHOF(Breadcrumb);
 const Context = createContext();
+
+const { containerQueries } = constant;
 
 class BasicLayout extends React.PureComponent {
     constructor(props) {
@@ -71,32 +76,29 @@ class BasicLayout extends React.PureComponent {
         });
     };
 
-    render() {
+    renderLayout = isMobile => {
         const {
             children,
             location,
             menuData,
             // collapsed,
-            allMenuData,
-            breadcrumbNameMap
+            allMenuData
         } = this.props;
-        const { pathname } = location;
 
-        const layout = (
-            <Layout className={styles.container}>
-                <SiderMenu
-                    logo=""
+        return (
+            <Layout
+                className={classNames(styles.container, isMobile && styles['container--mobile'])}
+            >
+                <Menu
+                    logo={Logo}
+                    isMobile={isMobile}
                     title={formatMessage({ id: 'title.default' })}
                     inlineIndent={24}
                     menuData={menuData}
                     {...this.props}
                 />
                 <Layout className={styles.container__inner}>
-                    <Header
-                        menuData={menuData}
-                        // logo={isMobile ? logoSmall : logo}
-                        {...this.props}
-                    />
+                    {!isMobile ? <Header {...this.props} /> : null}
                     <Bread routes={allMenuData} location={location} />
                     <Content className={styles.content}>
                         <div className={styles.content__inner}>{children}</div>
@@ -105,12 +107,23 @@ class BasicLayout extends React.PureComponent {
                 </Layout>
             </Layout>
         );
+    };
+
+    render() {
+        const { location, breadcrumbNameMap } = this.props;
+        const { pathname } = location;
 
         return (
             <React.Fragment>
-                <DocumentTitle title={this.getPageTitle(pathname, breadcrumbNameMap)}>
-                    <Context.Provider value={this.getContext()}>{layout}</Context.Provider>
-                </DocumentTitle>
+                <ContainerQuery query={containerQueries}>
+                    {({ isMobile = false }) => (
+                        <DocumentTitle title={this.getPageTitle(pathname, breadcrumbNameMap)}>
+                            <Context.Provider value={this.getContext()}>
+                                {this.renderLayout(isMobile)}
+                            </Context.Provider>
+                        </DocumentTitle>
+                    )}
+                </ContainerQuery>
             </React.Fragment>
         );
     }

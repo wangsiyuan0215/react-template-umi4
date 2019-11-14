@@ -6,7 +6,7 @@
 import menus from './zh-CN/menus';
 
 export default {
-    'title.default': '监控中心系统',
+    'title.default': '系统名称',
 
     'header.account.welcome': '你好！',
     'header.dropdown.logout': '登出',
