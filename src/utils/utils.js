@@ -55,3 +55,14 @@ export const generatorQueries = queries =>
     Object.keys(queries)
         .filter(item => queries[item])
         .reduce((acc, item) => ((acc = `${acc}&${item}=${queries[item]}`), acc), '');
+
+export const formatter4number = number => {
+    try {
+        return number.toString().replace(/\B(?=(\d{3})*$)/g, ',');
+    } catch (e) {
+        return number;
+    }
+};
+
+// with require.context in webpack
+export const requireAllFile = context => context.keys().map(context);
