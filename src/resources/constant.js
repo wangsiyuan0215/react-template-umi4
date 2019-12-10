@@ -19,9 +19,12 @@ export default {
         SUCCESS: 'success'
     },
     containerQueries: {
-        isMobile: {
+        isSmall: {
             minWidth: 375,
             maxWidth: 768
+        },
+        isLarge: {
+            minWidth: 1600
         }
     }
 };

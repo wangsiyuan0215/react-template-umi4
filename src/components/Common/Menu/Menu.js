@@ -6,11 +6,12 @@
 
 import Link from 'umi/link';
 import classNames from 'classnames';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { Button, Drawer, Icon } from 'antd';
 import React, { PureComponent, Suspense } from 'react';
 
-import Avatar from '@/components/Business/Avatar';
-import Loading from '@/components/Common/Loading';
+import Avatar from '@/components/Common/Avatar';
+import Loading, { LoadingWrapper } from '@/components/Common/Loading';
 import { getDefaultCollapsedSubMenus } from './MenuUtils';
 
 import styles from './index.less';
@@ -57,8 +58,8 @@ export default class SiderMenu extends PureComponent {
     onClose4drawer = () => this.setState({ visible: false });
 
     renderMenus4mobile = () => {
-        const { title, isMobile } = this.props;
         const { visible, openKeys } = this.state;
+        const { title, isMobile, isLarge, loading } = this.props;
 
         return isMobile ? (
             <Drawer
@@ -84,14 +85,24 @@ export default class SiderMenu extends PureComponent {
                 />
             </Drawer>
         ) : (
-            <BaseMenu
-                {...this.props}
-                mode="inline"
-                style={{ padding: '16px 0', width: '100%' }}
-                openKeys={openKeys}
-                onOpenChange={this.handleOpenChange}
-                handleOpenChange={this.handleOpenChange}
-            />
+            <>
+                <LoadingWrapper spinning={loading}>
+                    <BaseMenu
+                        {...this.props}
+                        mode={isLarge ? 'horizontal' : 'inline'}
+                        style={{ padding: '16px 0', width: '100%' }}
+                        openKeys={openKeys}
+                        onOpenChange={this.handleOpenChange}
+                        handleOpenChange={this.handleOpenChange}
+                    />
+                </LoadingWrapper>
+                {isLarge ? (
+                    <div className={styles.avatar__container}>
+                        <span>{formatMessage({ id: 'header.account.welcome' })}</span>
+                        <Avatar className={styles.avatar} size={44} name="王思远" />
+                    </div>
+                ) : null}
+            </>
         );
     };
 

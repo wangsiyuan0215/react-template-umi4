@@ -31,7 +31,7 @@ const getIcon = (icon, size = 24) => {
                 />
             );
         }
-        return <CustomIcon style={{ fontSize: size }} type={icon} />;
+        return <CustomIcon className={styles.icon} style={{ fontSize: size }} type={icon} />;
     }
     return icon;
 };

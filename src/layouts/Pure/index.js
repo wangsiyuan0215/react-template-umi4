@@ -10,7 +10,8 @@ import { ContainerQuery } from 'react-container-query';
 
 import constant from '@/resources/constant';
 
-import Footer from './Footer';
+import Footer from '../Components/Footer';
+
 import styles from './index.less';
 
 const { containerQueries } = constant;

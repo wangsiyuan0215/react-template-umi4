@@ -10,7 +10,7 @@ export default {
     subscriptions: {
         setup: ({ dispatch, history }) => {
             const actions = {
-                [`/`]: [
+                [`/home`]: [
                     {
                         // key is required
                         key: 'creating',
@@ -26,7 +26,7 @@ export default {
                     {
                         key: 'delete',
                         props: { type: 'primary', icon: 'minus' },
-                        localeId: 'delete',
+                        localeId: 'deleting',
                         loadingEffectName: 'namespace/action',
                         onClick: () =>
                             dispatch({

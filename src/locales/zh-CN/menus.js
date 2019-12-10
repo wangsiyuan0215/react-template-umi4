@@ -4,7 +4,11 @@
  * @Description: menu
  */
 const menus = {
-    home: '首页'
+    home: '首页',
+
+    '403': '403',
+    '404': '404',
+    others: '暂无'
 };
 
 export default Object.keys(menus).reduce(

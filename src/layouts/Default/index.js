@@ -20,10 +20,11 @@ import constant from '@/resources/constant';
 import BreadcrumbHOF from '@/HOFs/layouts/BreadcrumbHOF';
 import DefaultLayoutHOF from '@/HOFs/layouts/DefaultHOF';
 
-import Header from './Header';
-import Footer from '../Pure/Footer';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import Breadcrumb from '../Components/Breadcrumb';
+
 import styles from './index.less';
-import Breadcrumb from './Breadcrumb';
 
 const { Content } = Layout;
 
@@ -76,29 +77,25 @@ class BasicLayout extends React.PureComponent {
         });
     };
 
-    renderLayout = isMobile => {
-        const {
-            children,
-            location,
-            menuData,
-            // collapsed,
-            allMenuData
-        } = this.props;
+    renderLayout = ({ isSmall, isLarge }) => {
+        const { children, location, menuData, loading4menu, allMenuData } = this.props;
 
         return (
             <Layout
-                className={classNames(styles.container, isMobile && styles['container--mobile'])}
+                className={classNames(styles.container, isSmall && styles['container--mobile'])}
             >
                 <Menu
                     logo={Logo}
-                    isMobile={isMobile}
                     title={formatMessage({ id: 'title.default' })}
-                    inlineIndent={24}
+                    isLarge={isLarge}
+                    loading={loading4menu}
+                    isMobile={isSmall}
                     menuData={menuData}
+                    inlineIndent={24}
                     {...this.props}
                 />
                 <Layout className={styles.container__inner}>
-                    {!isMobile ? <Header {...this.props} /> : null}
+                    {!isSmall ? <Header {...this.props} /> : null}
                     <Bread routes={allMenuData} location={location} />
                     <Content className={styles.content}>
                         <div className={styles.content__inner}>{children}</div>
@@ -116,10 +113,10 @@ class BasicLayout extends React.PureComponent {
         return (
             <React.Fragment>
                 <ContainerQuery query={containerQueries}>
-                    {({ isMobile = false }) => (
+                    {({ isSmall = false, isLarge = false }) => (
                         <DocumentTitle title={this.getPageTitle(pathname, breadcrumbNameMap)}>
                             <Context.Provider value={this.getContext()}>
-                                {this.renderLayout(isMobile)}
+                                {this.renderLayout({ isSmall, isLarge })}
                             </Context.Provider>
                         </DocumentTitle>
                     )}

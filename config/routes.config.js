@@ -17,6 +17,7 @@ export default [
             {
                 path: '/home',
                 name: 'home',
+                icon: 'welcome',
                 component: './home'
             },
             {

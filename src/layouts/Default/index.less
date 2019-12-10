@@ -11,6 +11,14 @@
     .container__inner {
         padding-top: 64px;
     }
+
+    @media screen and (min-width: @screen-xxl-min) {
+        flex-direction: column !important;
+
+        .container__inner {
+            padding-top: 0;
+        }
+    }
 }
 .container--mobile {
     display: flex;
@@ -29,5 +37,10 @@
 
     .content__inner {
         margin: 24px;
+
+        @media screen and (min-width: @screen-xxl-min) {
+            max-width: 1440px;
+            margin: 24px auto;
+        }
     }
 }

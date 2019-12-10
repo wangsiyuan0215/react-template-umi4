@@ -4,8 +4,6 @@
  * @Last Modified by: siyuan.wang
  * @Last Modified time: 2019-03-10 22:37:13
  */
-/* eslint import/no-extraneous-dependencies: ["off"] */
-// import { effects as sagaEffect } from 'redux-saga';
 
 const userModel = {
     namespace: 'user',
@@ -15,12 +13,6 @@ const userModel = {
         token: null,
         admins: []
     },
-    // subscriptions: {
-    //     setup: ({ dispatch, history }) => {
-    //         history.listen(() => {
-    //         });
-    //     }
-    // },
     effects: {},
     reducers: {
         savingToken(state, { payload }) {

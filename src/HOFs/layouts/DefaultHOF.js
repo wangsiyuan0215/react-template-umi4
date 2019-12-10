@@ -5,23 +5,18 @@
  */
 import { connect } from 'dva';
 
-const mapStateToProps = ({ global, menu }) => ({
+const mapStateToProps = ({ menu, loading }) => ({
     menuData: menu.menuData,
-    collapsed: global.collapsed,
     allMenuData: menu.allMenuData,
+    loading4menu: !!loading.effects['menu/getMenuData'],
     breadcrumbNameMap: menu.breadcrumbNameMap
 });
 
 const mapDispatchToProps = dispatch => ({
     init: location => dispatch({ type: 'global/authentication', payload: location }),
+    // logout: () => dispatch({ type: 'user/logout' }),
     fetchMenuData: (routes, authority) =>
-        dispatch({ type: 'menu/getMenuData', payload: { routes, authority } }),
-    changeLayoutCollapsed: collapsed =>
-        dispatch({
-            type: 'global/changeLayoutCollapsed',
-            payload: collapsed
-        }),
-    logout: () => dispatch({ type: 'user/logout' })
+        dispatch({ type: 'menu/getMenuData', payload: { routes, authority } })
 });
 
 export default Component =>

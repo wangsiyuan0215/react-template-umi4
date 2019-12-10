@@ -1,38 +1,62 @@
 /*
- * @Author: SiYuan Wang
- * @Date: 2019-03-11 13:23:55
+ * @Editor: SiYuan Wang
+ * @Date: 2019-08-26 14:01:38
  * @Description: config
  */
+// https://umijs.org/config/
+import path from 'path';
+import pageRoutes from './routes.config';
+import svgoConfig from './svgo-config';
 
-import path from "path";
-import routes from './routes.config';
+const { APP_ENV } = process.env;
 
-const apiPrefixedUrl = {
-    dev: 'app-dev.url.com',
-    test: 'app-test.url.com',
-    prod: 'app-prod.url.com'
-};
-
-const apiProtocol = {
-    dev: 'http',
-    test: 'http',
-    prod: 'https'
-};
+const iconPath = path.join(__dirname, '../src/assets/icons');
 
 export default {
     hash: true,
+    // 路由配置
+    routes: pageRoutes,
+    history: 'hash',
+    publicPath: './',
     treeShaking: true,
+    /**
+     * webpack 相关配置
+     */
+    alias: {
+        /* eslint global-require:0 */
+        '@': require('path').resolve(__dirname, '../src'),
+        root: require('path').resolve(__dirname, '../'),
+        utils: require('path').resolve(__dirname, '../src/utils'),
+        pages: require('path').resolve(__dirname, '../src/pages'),
+        assets: require('path').resolve(__dirname, '../src/assets'),
+        models: require('path').resolve(__dirname, '../src/models'),
+        layouts: require('path').resolve(__dirname, '../src/layouts'),
+        locales: require('path').resolve(__dirname, '../src/locales'),
+        resources: require('path').resolve(__dirname, '../src/resources'),
+        components: require('path').resolve(__dirname, '../src/components')
+    },
+    theme: {
+        'primary-color': '#538fff'
+    },
+    define: {
+        IS_DEV: APP_ENV === 'development',
+        APP_ENV: APP_ENV || '',
+        IS_TEST: APP_ENV === 'test',
+        IS_PROD: APP_ENV === 'production'
+        // ICONFONT_JS_URL: '//at.alicdn.com/t/font_1362182_ufmmrnxmvh.js'
+    },
     plugins: [
         [
             'umi-plugin-react',
             {
-                antd: true,
+                dll: {
+                    include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch', 'antd/es']
+                },
                 dva: {
-                    hmr: true
+                    hmr: true,
+                    immer: true
                 },
-                targets: {
-                    ie: 11
-                },
+                antd: true,
                 locale: {
                     enable: true, // default false
                     default: 'zh-CN', // default zh-CN
@@ -42,66 +66,48 @@ export default {
                     level: 2,
                     webpackChunkName: true,
                     loadingComponent: './components/Common/Loading/index'
-                },
-                dll: {
-                    include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch', 'antd/es']
                 }
             }
         ]
     ],
-    targets: { ie: 11 },
-
-    /**
-     * 路由相关配置
-     */
-    routes: routes,
-    disableRedirectHoist: true,
-    // proxy: {
-    //     '/api': {
-    //         target: ((env) => {
-    //             const targetUrl = getApiUrl(env);
-    //             // eslint-disable-next-line no-console
-    //             console.log(`current prefixed url of api: ${targetUrl}`);
-    //
-    //             return targetUrl;
-    //         })(APP_ENV),
-    //         changeOrigin: true
-    //     }
-    // },
-    /**
-     * webpack 相关配置
-     */
-    alias: {
-        '@': require('path').resolve(__dirname, '../src'),
-        root: require('path').resolve(__dirname, '..'),
-        utils: require('path').resolve(__dirname, '../src/utils'),
-        pages: require('path').resolve(__dirname, '../src/pages'),
-        assets: require('path').resolve(__dirname, '../src/assets'),
-        models: require('path').resolve(__dirname, '../src/models'),
-        layouts: require('path').resolve(__dirname, '../src/layouts'),
-        locales: require('path').resolve(__dirname, '../src/locales'),
-        services: require('path').resolve(__dirname, '../src/services'),
-        resources: require('path').resolve(__dirname, '../src/resources'),
-        components: require('path').resolve(__dirname, '../src/components')
+    targets: {
+        ios: 10,
+        edge: 13,
+        chrome: 49,
+        safari: 10,
+        firefox: 45
     },
-    define: {
-        requestPrefixedStr: `${apiProtocol[process.env.DEPLOYMENT_ENV]}://${
-            apiPrefixedUrl[process.env.DEPLOYMENT_ENV]
-        }`,
-        assetsUrlPrefixedStr: process.env.DEPLOYMENT_ENV === 'development' ? '/files/' : '/files/'
-    },
-    // Theme for antd
-    // https://ant.design/docs/react/customize-theme-cn
-    theme: {
-        'primary-color': '#2c2e3e'
-    },
-    externals: {},
-    ignoreMomentLocale: true,
-    lessLoaderOptions: {
-        javascriptEnabled: true
+    manifest: {
+        basePath: '/'
     },
     chainWebpack: config => {
         config.resolve.modules.add(path.resolve(__dirname, '../src/resources'));
         config.resolve.extensions.add('less');
-    }
+        config.module
+            .rule('svg-sprite-loader')
+            .test(/\.svg(\?v=\d+\.\d+\.\d+)?$/)
+            .include.add(iconPath)
+            .end()
+            .use('svg')
+            .loader('svg-sprite-loader')
+            .options({
+                symbolId: 'icon-[name]'
+            });
+
+        config.module
+            .rule('svgo')
+            .test(/\.svg(\?v=\d+\.\d+\.\d+)?$/)
+            .include.add(iconPath)
+            .end()
+            .use('svgo')
+            .loader('file-loader')
+            .loader('svgo-loader')
+            .options(svgoConfig);
+    },
+    urlLoaderExcludes: [iconPath],
+    lessLoaderOptions: {
+        javascriptEnabled: true
+    },
+    ignoreMomentLocale: true,
+    disableRedirectHoist: true
 };

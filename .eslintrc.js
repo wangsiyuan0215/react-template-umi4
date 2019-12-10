@@ -1,25 +1,32 @@
 module.exports = {
-    parser: 'babel-eslint',
-    extends: ['airbnb', 'prettier', 'plugin:compat/recommended'],
+    // parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
+    extends: [
+        'plugin:@typescript-eslint/recommended',
+        'plugin:compat/recommended',
+        'airbnb',
+        'prettier'
+    ],
     plugins: [
-        "react",
-        "babel",
-        "compat",
-        "import",
-        "jsx-a11y",
-        "markdown",
-        "react-hooks"
+        '@typescript-eslint',
+        'react',
+        'babel',
+        'compat',
+        'import',
+        'jsx-a11y',
+        'markdown',
+        'react-hooks'
     ],
     env: {
-        browser: true,
-        node: true,
         es6: true,
-        mocha: true,
         jest: true,
+        node: true,
+        mocha: true,
+        browser: true,
         jasmine: true
     },
     globals: {
-        page: true,
+        TOKEN: true,
         APP_ENV: true,
         APP_URL: true,
         IS_DEV: true,
@@ -28,8 +35,8 @@ module.exports = {
         ICONFONT_JS_URL: true
     },
     rules: {
-        'react/jsx-indent':  ["error", 4],
-        'react/jsx-indent-props': ["error", 4],
+        'react/jsx-indent': ['error', 4],
+        'react/jsx-indent-props': ['error', 4],
         'react/jsx-filename-extension': [1, { extensions: ['.js'] }],
         'react/jsx-wrap-multilines': 0,
         'react/prop-types': 0,
@@ -47,6 +54,9 @@ module.exports = {
         'jsx-a11y/click-events-have-key-events': 0,
         'jsx-a11y/no-static-element-interactions': 0,
         'jsx-a11y/anchor-is-valid': 0,
+        '@typescript-eslint/class-name-casing': 2,
+        '@typescript-eslint/explicit-function-return-type': 0,
+
         'comma-style': [2, 'last'],
         'comma-dangle': [2, 'never'],
         'linebreak-style': 0

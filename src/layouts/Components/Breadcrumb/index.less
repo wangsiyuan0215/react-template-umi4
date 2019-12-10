@@ -50,10 +50,12 @@
             }
         }
     }
-}
 
-@media (max-width: 767px) {
-    .bread {
+    @media screen and (min-width: @screen-xxl-min) {
+        padding: 0 calc(50% - 720px);
+    }
+
+    @media (max-width: 767px) {
         margin-bottom: 12px;
     }
 }

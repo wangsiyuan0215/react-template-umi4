@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { Menu, Icon } from 'antd';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 
-import Avatar from '@/components/Business/Avatar';
+import Avatar from '@/components/Common/Avatar';
 import HeaderDropdown from '@/components/Common/HeaderDropdown';
 
 import styles from './index.less';

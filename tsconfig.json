@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "jsx": "preserve",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "experimentalDecorators": false,
+        "emitDecoratorMetadata": false,
+        "paths": {
+            "@/*": ["src/*"],
+            "root/*": ["./*"]
+        },
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": [
+        "node_modules" // 这个目录下的代码不会被 typescript 处理
+    ]
+}
