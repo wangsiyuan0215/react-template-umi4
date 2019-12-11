@@ -17,23 +17,25 @@ import React, { createContext } from 'react';
 import Logo from '@/assets/logo@2x.png';
 import Menu from '@/components/Common/Menu';
 import constant from '@/resources/constant';
+import HeaderHOF from '@/HOFs/layouts/HeaderHOF';
 import BreadcrumbHOF from '@/HOFs/layouts/BreadcrumbHOF';
 import DefaultLayoutHOF from '@/HOFs/layouts/DefaultHOF';
 
-import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import Breadcrumb from '../Components/Breadcrumb';
+import HeaderComponent from '../Components/Header';
 
 import styles from './index.less';
 
 const { Content } = Layout;
 
 const Bread = BreadcrumbHOF(Breadcrumb);
+const Header = HeaderHOF(HeaderComponent);
 const Context = createContext();
 
 const { containerQueries } = constant;
 
-class BasicLayout extends React.PureComponent {
+class DefaultLayout extends React.PureComponent {
     constructor(props) {
         super(props);
         this.getPageTitle = memoizeOne(this.getPageTitle);
@@ -126,4 +128,4 @@ class BasicLayout extends React.PureComponent {
     }
 }
 
-export default DefaultLayoutHOF(BasicLayout);
+export default DefaultLayoutHOF(DefaultLayout);

@@ -3,10 +3,10 @@
  * @Date: 2019-03-11 16:41:22
  * @Description: index
  */
+
 import React from 'react';
-import { Layout } from 'antd';
-import { connect } from 'dva';
 import PropTypes from 'prop-types';
+import { Layout } from 'antd';
 
 import HeaderComponent from '@/components/Common/Header';
 
@@ -33,11 +33,4 @@ Header.defaultProps = {
     user: {}
 };
 
-const mapStateToProps = ({ user }) => ({
-    user: user.user
-});
-
-export default connect(
-    mapStateToProps,
-    null
-)(Header);
+export default Header;

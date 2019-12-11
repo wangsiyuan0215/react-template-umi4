@@ -22,7 +22,7 @@ const PureLayout = props => {
     const { children } = props;
     return (
         <ContainerQuery query={containerQueries}>
-            {({ isMobile = false }) => (
+            {({ isSmall = false, isLarge = false }) => (
                 <DocumentTitle title={getPageTitle()}>
                     <div className={styles.container}>
                         {children}

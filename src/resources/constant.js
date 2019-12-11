@@ -20,7 +20,7 @@ export default {
     },
     containerQueries: {
         isSmall: {
-            minWidth: 375,
+            minWidth: 320,
             maxWidth: 768
         },
         isLarge: {

@@ -15,9 +15,9 @@ export default [
                 redirect: '/home'
             },
             {
-                path: '/home',
-                name: 'home',
                 icon: 'welcome',
+                name: 'home',
+                path: '/home',
                 component: './home'
             },
             {

@@ -4,7 +4,6 @@
  * @Description: index
  */
 
-@import '~antd/lib/style/themes/default.less';
 @import (reference) '~_.less';
 
 @pro-header-hover-bg: rgba(0, 0, 0, 0.025);
@@ -32,8 +31,8 @@
     align-items: center;
     float: right;
     height: 100%;
-    overflow: hidden;
     padding: 0 24px;
+    overflow: hidden;
     cursor: pointer;
 
     .account {
@@ -60,15 +59,16 @@
             padding: 22px 12px;
         }
         .logo {
-            padding-left: 12px;
-            padding-right: 12px;
             position: relative;
+            padding-right: 12px;
+            padding-left: 12px;
         }
         .right {
             position: absolute;
-            right: 12px;
             top: 0;
+            right: 12px;
             background: #fff;
+
             .account {
                 .avatar {
                     margin-right: 0;

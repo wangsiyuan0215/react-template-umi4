@@ -1,16 +1,16 @@
 /*
  * @Author: SiYuan Wang
  * @Date: 2019-03-11 15:10:28
- * @Description: SiderMenu
+ * @Description: Menu
  */
 
 import Link from 'umi/link';
+import React from 'react';
 import classNames from 'classnames';
-import { formatMessage } from 'umi-plugin-react/locale';
 import { Button, Drawer, Icon } from 'antd';
-import React, { PureComponent, Suspense } from 'react';
 
 import Avatar from '@/components/Common/Avatar';
+import RightContent from '@/components/Common/Header/RightContent';
 import Loading, { LoadingWrapper } from '@/components/Common/Loading';
 import { getDefaultCollapsedSubMenus } from './MenuUtils';
 
@@ -18,7 +18,7 @@ import styles from './index.less';
 
 const BaseMenu = React.lazy(() => import('./BaseMenu'));
 
-export default class SiderMenu extends PureComponent {
+export default class Menu extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,9 +57,9 @@ export default class SiderMenu extends PureComponent {
 
     onClose4drawer = () => this.setState({ visible: false });
 
-    renderMenus4mobile = () => {
+    renderMenus = () => {
         const { visible, openKeys } = this.state;
-        const { title, isMobile, isLarge, loading } = this.props;
+        const { title, isMobile, isLarge, loading, logout } = this.props;
 
         return isMobile ? (
             <Drawer
@@ -97,10 +97,11 @@ export default class SiderMenu extends PureComponent {
                     />
                 </LoadingWrapper>
                 {isLarge ? (
-                    <div className={styles.avatar__container}>
-                        <span>{formatMessage({ id: 'header.account.welcome' })}</span>
-                        <Avatar className={styles.avatar} size={44} name="王思远" />
-                    </div>
+                    <RightContent
+                        className={styles.avatar__container}
+                        onMenuClick={logout}
+                        textClassName={styles.text__white}
+                    />
                 ) : null}
             </>
         );
@@ -108,7 +109,6 @@ export default class SiderMenu extends PureComponent {
 
     render() {
         const { logo, title, isMobile } = this.props;
-
         return (
             <div
                 className={classNames(
@@ -132,8 +132,8 @@ export default class SiderMenu extends PureComponent {
                     ) : null}
                     {!isMobile && title ? <h1 className={styles.title}>{title}</h1> : null}
                 </div>
-                {isMobile ? <Avatar className={styles.avatar} size={36} name="王思远" /> : null}
-                <Suspense fallback={<Loading />}>{this.renderMenus4mobile()}</Suspense>
+                {isMobile ? <Avatar size={36} name="王思远" /> : null}
+                <React.Suspense fallback={<Loading />}>{this.renderMenus()}</React.Suspense>
             </div>
         );
     }

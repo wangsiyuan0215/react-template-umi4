@@ -11,7 +11,7 @@ import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
 import withRouter from 'umi/withRouter';
 import { formatMessage } from 'umi-plugin-react/locale';
-import { Button, Breadcrumb, Icon } from 'antd';
+import { Button, Breadcrumb } from 'antd';
 
 import styles from './index.less';
 
@@ -36,19 +36,13 @@ const getAncestor = curry((pathname, paths) => {
 
     return result;
 });
+
 const generateBreadcrumbs = paths =>
     paths.map((path, index) => {
         const isLast = index === paths.length - 1;
-        const content = (
-            <React.Fragment>
-                {path.icon ? <Icon type={path.icon} style={{ marginRight: 4 }} /> : null}
-                {path.name}
-            </React.Fragment>
-        );
-
         return (
             <Breadcrumb.Item key={path.path}>
-                {!isLast ? <Link to={path.path || '#'}>{content}</Link> : content}
+                {!isLast ? <Link to={path.path || '#'}>{path.name}</Link> : path.name}
             </Breadcrumb.Item>
         );
     });

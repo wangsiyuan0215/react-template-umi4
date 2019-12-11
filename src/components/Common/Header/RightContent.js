@@ -14,8 +14,7 @@ import HeaderDropdown from '@/components/Common/HeaderDropdown';
 
 import styles from './index.less';
 
-const RightContent = props => {
-    const { onMenuClick } = props;
+const RightContent = ({ className, textClassName, onMenuClick }) => {
     const menu = (
         <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
             <Menu.Item key="logout">
@@ -25,10 +24,12 @@ const RightContent = props => {
         </Menu>
     );
     return (
-        <div className={classNames(styles.right)}>
+        <div className={classNames(styles.right, className)}>
             <HeaderDropdown overlay={menu} placement="bottomRight">
                 <span className={styles.account}>
-                    <span>{formatMessage({ id: 'header.account.welcome' })}</span>
+                    <span className={textClassName}>
+                        {formatMessage({ id: 'header.account.welcome' })}
+                    </span>
                     <Avatar className={styles.avatar} size={44} name="王思远" />
                 </span>
             </HeaderDropdown>
