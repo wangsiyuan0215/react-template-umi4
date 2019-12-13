@@ -86,6 +86,16 @@
             "prettier --write",
             "git add"
         ],
+        "src/**/*.ts": [
+            "eslint --fix --ext .ts",
+            "prettier --write",
+            "git add"
+        ],
+        "src/**/*.tsx": [
+            "eslint --fix --ext .tsx",
+            "prettier --write",
+            "git add"
+        ],
         "src/**/*.less": [
             "stylelint --syntax less",
             "prettier --write",
