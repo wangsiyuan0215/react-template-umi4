@@ -8,14 +8,6 @@
 
 @pro-header-hover-bg: rgba(0, 0, 0, 0.025);
 
-.header {
-    position: relative;
-    height: @layout-header-height;
-    padding: 0;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0, 21, 41, 0.12);
-}
-
 .menu {
     :global(.anticon) {
         margin-right: 8px;
@@ -47,22 +39,23 @@
     }
 }
 
+.dropdown__container > *:global(:not(.ant-dropdown-menu)) {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: @shadow-1-down;
+}
+
+@media screen and (max-width: @screen-xs) {
+    .dropdown__container {
+        width: 100% !important;
+    }
+    .dropdown__container > * {
+        border-radius: 0 !important;
+    }
+}
+
 @media only screen and (max-width: @screen-md) {
     .header {
-        :global(.ant-divider-vertical) {
-            vertical-align: unset;
-        }
-        .name {
-            display: none;
-        }
-        i.trigger {
-            padding: 22px 12px;
-        }
-        .logo {
-            position: relative;
-            padding-right: 12px;
-            padding-left: 12px;
-        }
         .right {
             position: absolute;
             top: 0;

@@ -28,6 +28,10 @@ export default [
                 path: '/exception/404',
                 hideInMenu: true,
                 component: './exceptions/404'
+            },{
+                path: '*',
+                hideInMenu: true,
+                redirect: '/exception/404'
             }
         ]
     }

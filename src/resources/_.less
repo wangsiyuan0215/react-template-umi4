@@ -22,15 +22,19 @@
 @lightRedColor: #ff6a6a;
 
 // color, font-size, line-height
-.cf (@color: #fff, @fs: 16px) {
+.cfl (@color) {
+    color: @color;
+}
+.cfl (@color, @fs) {
     color: @color;
     font-size: @fs;
 }
-.cfl (@color: #fff, @fs: 16px, @lh: 16px) {
+.cfl (@color, @fs, @lh) {
     color: @color;
     font-size: @fs;
     line-height: @lh;
 }
+
 .linear-gradient(@deg, @colorForm, @colorTo) {
     background: @colorForm;
     background: -webkit-linear-gradient(@deg, @colorForm, @colorTo);

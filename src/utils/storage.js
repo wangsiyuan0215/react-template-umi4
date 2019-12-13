@@ -3,7 +3,7 @@
  * @Date: 2019-03-11 21:39:55
  * @Description: storage utils
  */
-import constant from '@/resources/constant';
+import { Keys4storage } from '@/resources/constant';
 
 export const getStorageForSomething = (key, where = 'localStorage') => {
     const finalValue = window[where].getItem(key);
@@ -25,7 +25,7 @@ export const removeStorageForSomething = (key, where = 'localStorage') => {
 
 export function getAuthority(str) {
     const authorityString =
-        typeof str === 'undefined' ? localStorage.getItem(constant.storage.authority) : str;
+        typeof str === 'undefined' ? localStorage.getItem(Keys4storage.authority) : str;
     // authorityString could be admin, "admin", ["admin"]
     let authority;
     try {
@@ -41,5 +41,5 @@ export function getAuthority(str) {
 
 export function setAuthority(authority) {
     const proAuthority = typeof authority === 'string' ? [authority] : authority;
-    return localStorage.setItem(constant.storage.authority, JSON.stringify(proAuthority));
+    return localStorage.setItem(Keys4storage.authority, JSON.stringify(proAuthority));
 }

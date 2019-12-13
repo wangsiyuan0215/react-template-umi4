@@ -6,12 +6,19 @@
 
 import { connect } from 'dva';
 
-const mapStateToProps = ({ user }) => ({
-    user: user.user
+const mapStateToProps = ({ user, loading }) => ({
+    user: user.user,
+    loading: !!loading.effects['user/logout'],
+    keys4dropdown: user.keys4dropdown
+});
+
+const mapDispatchToProps = dispatch => ({
+    onClick4dropdown: ({ key }) =>
+        dispatch({ type: 'user/handler4dropdownInHeader', payload: { key } })
 });
 
 export default Component =>
     connect(
         mapStateToProps,
-        undefined
+        mapDispatchToProps
     )(Component);

@@ -5,31 +5,31 @@
  */
 
 import React from 'react';
+import classNames from 'classnames';
 import DocumentTitle from 'react-document-title';
+import { formatMessage } from 'umi-plugin-react/locale';
 import { ContainerQuery } from 'react-container-query';
 
-import constant from '@/resources/constant';
-
-import Footer from '../Components/Footer';
+import { IsLarge, IsSmall } from '@/resources/constant';
 
 import styles from './index.less';
 
-const { containerQueries } = constant;
-
 /* eslint no-unused-vars: 0 */
-const PureLayout = props => {
-    const getPageTitle = () => 'Login -  NtMY';
-    const { children } = props;
+const PureLayout = ({
+    title = formatMessage({ id: 'title.default' }),
+    children,
+    wrapperClassName
+}) => {
     return (
-        <ContainerQuery query={containerQueries}>
+        <ContainerQuery
+            query={{
+                isSmall: { ...IsSmall },
+                isLarge: { ...IsLarge }
+            }}
+        >
             {({ isSmall = false, isLarge = false }) => (
-                <DocumentTitle title={getPageTitle()}>
-                    <div className={styles.container}>
-                        {children}
-                        <section className={styles.footerContainer}>
-                            <Footer />
-                        </section>
-                    </div>
+                <DocumentTitle title={title}>
+                    <div className={classNames(styles.container, wrapperClassName)}>{children}</div>
                 </DocumentTitle>
             )}
         </ContainerQuery>

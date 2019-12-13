@@ -1,22 +1,23 @@
-/**
- * Created by wangsiyuan on 28/11/2017.
+/*
+ * @Author: SiYuan Wang
+ * @Date: 2019-12-13 11:54:19
+ * @Description: errorHelper
  */
-import { curry } from 'ramda';
+
+import curry from 'ramda/es/curry';
 import { notification } from 'antd';
 
-import constance from '@/resources/constant';
+import { ErrorTypes } from '@/resources/constant';
 
-const { errorTypes } = constance;
-
-const errorHandlers = Object.keys(errorTypes).reduce(
+const errorHandlers = Object.keys(ErrorTypes).reduce(
     (accumulator, item) => ({
         ...accumulator,
-        [errorTypes[item]]: message => notification[errorTypes[item]](message)
+        [ErrorTypes[item]]: message => notification[ErrorTypes[item]]({ message })
     }),
     {}
 );
 
-const errorsCurried = curry((AlertComponent, handlers, error, dispatch) => {
+const errorsCurried = curry((handlers, error, dispatch) => {
     // eslint-disable-next-line no-unused-expressions
     error && error.preventDefault();
     const { errorType = null, actionType = '', errorMessageCh = null } = error;
@@ -32,13 +33,11 @@ const errorsCurried = curry((AlertComponent, handlers, error, dispatch) => {
     if (!errorMessageCh) return false;
     if (errorType && handlers[errorType]) return handlers[errorType](errorMessageCh);
 
-    return notification.error({
-        message: errorMessageCh
-    });
+    return handlers[ErrorTypes.ERROR](errorMessageCh);
 });
 
 const errorCreator = curry((actionType, type, message) => {
-    const errorType = !type ? errorTypes.INFO : type;
+    const errorType = !type ? ErrorTypes.ERROR : type;
     return {
         errorType,
         actionType,
@@ -46,6 +45,6 @@ const errorCreator = curry((actionType, type, message) => {
     };
 });
 
-const _ = errorsCurried(notification, errorHandlers);
+const _ = errorsCurried(errorHandlers);
 
 export { _, errorCreator };

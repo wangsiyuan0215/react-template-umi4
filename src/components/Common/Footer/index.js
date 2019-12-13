@@ -18,14 +18,15 @@ const copyright = (
     </Fragment>
 );
 
-const Footer = () => (
+const Footer = ({ color }) => (
     <FooterWrapper
         style={{
             fontSize: 12,
             textAlign: 'center',
             padding: 0,
             margin: '20px auto',
-            color: 'rgba(0, 0, 0, .3)'
+            color: color || 'rgba(0, 0, 0, .3)',
+            backgroundColor: 'transparent'
         }}
     >
         {copyright}

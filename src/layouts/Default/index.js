@@ -15,13 +15,13 @@ import { ContainerQuery } from 'react-container-query';
 import React, { createContext } from 'react';
 
 import Logo from '@/assets/logo@2x.png';
-import Menu from '@/components/Common/Menu';
-import constant from '@/resources/constant';
+import Footer from '@/components/Common/Footer';
 import HeaderHOF from '@/HOFs/layouts/HeaderHOF';
 import BreadcrumbHOF from '@/HOFs/layouts/BreadcrumbHOF';
 import DefaultLayoutHOF from '@/HOFs/layouts/DefaultHOF';
+import { IsLarge, IsSmall } from '@/resources/constant';
 
-import Footer from '../Components/Footer';
+import Menu from '../Components/Menu';
 import Breadcrumb from '../Components/Breadcrumb';
 import HeaderComponent from '../Components/Header';
 
@@ -32,8 +32,6 @@ const { Content } = Layout;
 const Bread = BreadcrumbHOF(Breadcrumb);
 const Header = HeaderHOF(HeaderComponent);
 const Context = createContext();
-
-const { containerQueries } = constant;
 
 class DefaultLayout extends React.PureComponent {
     constructor(props) {
@@ -80,24 +78,38 @@ class DefaultLayout extends React.PureComponent {
     };
 
     renderLayout = ({ isSmall, isLarge }) => {
-        const { children, location, menuData, loading4menu, allMenuData } = this.props;
+        const {
+            user,
+            children,
+            location,
+            menuData,
+            allMenuData,
+            loading4menu,
+            loading4right,
+            keys4dropdown,
+            onClick4dropdownInHeader
+        } = this.props;
 
         return (
             <Layout
                 className={classNames(styles.container, isSmall && styles['container--mobile'])}
             >
                 <Menu
+                    user={user}
                     logo={Logo}
                     title={formatMessage({ id: 'title.default' })}
                     isLarge={isLarge}
                     loading={loading4menu}
+                    location={location}
                     isMobile={isSmall}
                     menuData={menuData}
                     inlineIndent={24}
-                    {...this.props}
+                    loading4right={loading4right}
+                    keys4dropdown={keys4dropdown}
+                    onclick4dropdown={onClick4dropdownInHeader}
                 />
                 <Layout className={styles.container__inner}>
-                    {!isSmall ? <Header {...this.props} /> : null}
+                    {!isSmall ? <Header /> : null}
                     <Bread routes={allMenuData} location={location} />
                     <Content className={styles.content}>
                         <div className={styles.content__inner}>{children}</div>
@@ -114,7 +126,12 @@ class DefaultLayout extends React.PureComponent {
 
         return (
             <React.Fragment>
-                <ContainerQuery query={containerQueries}>
+                <ContainerQuery
+                    query={{
+                        isSmall: { ...IsSmall },
+                        isLarge: { ...IsLarge }
+                    }}
+                >
                     {({ isSmall = false, isLarge = false }) => (
                         <DocumentTitle title={this.getPageTitle(pathname, breadcrumbNameMap)}>
                             <Context.Provider value={this.getContext()}>

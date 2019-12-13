@@ -3,9 +3,10 @@
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
 
-import constant from '@/resources/constance';
 import umiRouter from 'umi/router';
 import { extend } from 'umi-request';
+
+import { SuccessCode } from '@/resources/constant';
 
 const codeMessage = {
     400: 'There was an error with the request that the server did not make new or modified data.',
@@ -62,7 +63,7 @@ request.interceptors.response.use(async response => {
 
     if ([200, 201, 202, 204, 555, 599].includes(Number(status))) {
         const result = await clone.json();
-        if (result.code && result.code !== constant.successCode)
+        if (result.code && result.code !== SuccessCode)
             throw new Error(result.msg || result.message || result.title || '123123123');
     }
 

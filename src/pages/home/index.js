@@ -5,4 +5,6 @@
  */
 import React from 'react';
 
-export default () => <div>HOME</div>;
+import styles from './index.less';
+
+export default () => <div className={styles.container}>HOME</div>;
