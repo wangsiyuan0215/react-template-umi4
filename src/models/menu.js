@@ -116,7 +116,8 @@ export default {
             const { routes, authority } = payload;
             const allMenuData = memoizeOneFormatter(routes, authority);
             const menuData = filterMenuData(allMenuData);
-            const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(menuData);
+            const breadcrumbNameMap = memoizeOneGetBreadcrumbNameMap(allMenuData);
+
             yield put({
                 type: 'receive',
                 payload: { menuData, allMenuData, breadcrumbNameMap }

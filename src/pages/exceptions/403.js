@@ -10,9 +10,13 @@ import { formatMessage } from 'umi-plugin-react/locale';
 
 export default () => (
     <Exception
-        desc={formatMessage({ id: 'app.exception.description.403' })}
+        desc={[
+            formatMessage({ id: 'app.exception.description.403.1' }),
+            formatMessage({ id: 'app.exception.description.403.2' })
+        ]}
         image={image403}
         title="403"
-        backText={formatMessage({ id: 'app.exception.back' })}
+        redirect="/login"
+        backText={formatMessage({ id: 'app.exception.login' })}
     />
 );

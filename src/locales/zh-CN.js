@@ -17,16 +17,16 @@ export default {
     'footer.version': '当前版本：',
     'footer.company.copyright': '2019 生活空间（沈阳）数据服务有限公司',
 
-    'app.exception.description.403': '很抱歉，你所具备的权限无法访问当前页面',
-    'app.exception.description.404': '很抱歉，你所访问的页面未找到',
+    'app.exception.description.403.1': '很抱歉，因「权限受限」你无法访问目标页面……',
+    'app.exception.description.403.2':
+        '你可以尝试「重新登录」或「检查当前访问的路径」以解决该问题。',
+    'app.exception.description.404.1': '很抱歉，你所访问的页面未找到',
+    'app.exception.description.404.2': '你可以尝试「检查当前访问的路径」以解决该问题。',
     'app.exception.back': '回到首页',
+    'app.exception.login': '重新登录',
 
     creating: '创建',
     deleting: '删除',
-
-    '403': '403',
-    '404': '404',
-    others: '暂无',
 
     ...zhCN.reduce(
         (acc, item) => ({

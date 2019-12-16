@@ -42,12 +42,12 @@ class DefaultLayout extends React.PureComponent {
 
     componentDidMount() {
         const {
-            location,
             route: { routes, authority },
-            init,
-            fetchMenuData
+            location,
+            fetchMenuData,
+            authentication
         } = this.props;
-        init(location);
+        authentication(location);
         fetchMenuData(routes, authority);
     }
 

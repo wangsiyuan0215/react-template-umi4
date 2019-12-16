@@ -12,26 +12,25 @@ export default [
         routes: [
             {
                 path: '/',
-                redirect: '/home'
+                redirect: '/welcome'
             },
             {
                 icon: 'welcome',
-                name: 'home',
-                path: '/home',
-                component: './home'
+                name: 'welcome',
+                path: '/welcome',
+                component: './welcome'
+            },
+            {
+                path: '/exception/404',
+                name: '404',
+                hideInMenu: true,
+                component: './exceptions/404'
             },
             {
                 path: '/exception/403',
+                name: '403',
                 hideInMenu: true,
                 component: './exceptions/403'
-            }, {
-                path: '/exception/404',
-                hideInMenu: true,
-                component: './exceptions/404'
-            },{
-                path: '*',
-                hideInMenu: true,
-                redirect: '/exception/404'
             }
         ]
     }

@@ -4,11 +4,11 @@
  * @Description: menu
  */
 const menus = {
-    home: '首页',
+    welcome: '欢迎',
 
-    '403': '403',
-    '404': '404',
-    others: '暂无'
+    '403': '权限受限「403」',
+    '404': '资源丢失「404」',
+    others: '其他错误「OTHERS」'
 };
 
 export default Object.keys(menus).reduce(
