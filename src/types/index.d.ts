@@ -4,7 +4,7 @@
  * @Description: common.d
  */
 
-export interface IBasicModel<T> {
+export declare interface BasicModel<T> {
     state: T;
     effects: any;
     reducers: any;
@@ -12,12 +12,12 @@ export interface IBasicModel<T> {
     subscriptions?: any;
 }
 
-export interface Pagination {
+export declare interface Pagination {
     totalCount: number;
     currentPage: number;
 }
 
-export interface Params4page {
+export declare interface Params4page {
     pageNum: number;
     pageSize: number;
 }

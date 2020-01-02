@@ -12,7 +12,15 @@
         "emitDecoratorMetadata": false,
         "paths": {
             "@/*": ["src/*"],
-            "root/*": ["./*"]
+            "root/*": ["./*"],
+            "utils/*": ["./src/utils/*"],
+            "pages/*": ["./src/pages/*"],
+            "assets/*": ["./src/assets/*"],
+            "models/*": ["./src/models/*"],
+            "layouts/*": ["./src/layouts/*"],
+            "locales/*": ["./src/locales/*"],
+            "resources/*": ["./src/resources/*"],
+            "components/*": ["./src/components/*"]
         },
         "allowSyntheticDefaultImports": true
     },
