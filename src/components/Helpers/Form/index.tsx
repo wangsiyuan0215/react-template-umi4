@@ -6,9 +6,46 @@
 
 import React from 'react';
 import { Form } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
+import { WrappedFormUtils, GetFieldDecoratorOptions } from 'antd/es/form/Form';
+import { FormProps, FormCreateOption, FormItemProps, FormComponentProps } from 'antd/es/form';
 
-import { IFormHelper, IOption, ParamsType } from './index.d';
+declare type InitialValuesType = {
+    [key: string]: any;
+};
+
+declare type CreatorDataType = {
+    [key: string]: any;
+};
+
+declare type CreatorActionsType = {
+    [key: string]: {
+        [action: string]: Function;
+    };
+};
+
+export declare type ParamsType = {
+    initialValues?: InitialValuesType | any;
+    creatorData?: CreatorDataType | any;
+    creatorActions?: CreatorActionsType | any;
+};
+
+export declare interface IFormHelper<T = any> {
+    form: WrappedFormUtils<T>;
+    renderForm: (param: ParamsType) => React.ReactNode | React.ReactNode;
+}
+
+export declare interface IFormItem extends FormItemProps {
+    key: string;
+    label?: string;
+    option?: ((form: WrappedFormUtils) => GetFieldDecoratorOptions) | GetFieldDecoratorOptions;
+    creator: ((creatorData, creatorActions) => React.ReactNode) | React.ReactNode;
+}
+
+export declare interface IOption<T> extends FormCreateOption<T> {
+    name?: string;
+    formProps?: FormProps;
+    formItems?: Array<IFormItem>;
+}
 
 /**
  * if you want to expand options in `Form.Create` high-order function,
@@ -31,8 +68,8 @@ import { IFormHelper, IOption, ParamsType } from './index.d';
  *   ...Form.create.options
  * }}
  */
-export default function FormHelper<T extends FormComponentProps<any>>(options: IOption<{}>) {
-    return function _wrapperFn(Component: React.ComponentType<IFormHelper>): React.ReactNode {
+export default function FormHelper<T extends FormComponentProps<any>>(options: IOption<T>) {
+    return function _wrapperFn(Component: new () => React.Component<any, any>): React.ReactNode {
         const { formItems, name = `form-${Date.now()}`, formProps, ...restOptions } = options;
         const wrapperComponent = ({ form, ...restProps }): React.ReactElement => {
             const { getFieldDecorator } = form;

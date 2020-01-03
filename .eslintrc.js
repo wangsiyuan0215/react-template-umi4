@@ -37,11 +37,12 @@ module.exports = {
     rules: {
         'react/jsx-indent': ['error', 4],
         'react/jsx-indent-props': ['error', 4],
-        'react/jsx-filename-extension': [1, { extensions: ['.js'] }],
+        'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
         'react/jsx-wrap-multilines': 0,
         'react/prop-types': 0,
         'react/forbid-prop-types': 0,
         'react/jsx-one-expression-per-line': 0,
+
         'import/no-unresolved': [
             2,
             {
@@ -67,11 +68,16 @@ module.exports = {
                 devDependencies: ['**/tests/**.js', '/mock/**/**.js', '**/**.test.js']
             }
         ],
-        'jsx-a11y/no-noninteractive-element-interactions': 0,
+
+        'jsx-a11y/anchor-is-valid': 0,
         'jsx-a11y/click-events-have-key-events': 0,
         'jsx-a11y/no-static-element-interactions': 0,
-        'jsx-a11y/anchor-is-valid': 0,
+        'jsx-a11y/no-noninteractive-element-interactions': 0,
+
+        '@typescript-eslint/no-var-requires': 0,
+        '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/class-name-casing': 2,
+        '@typescript-eslint/interface-name-prefix': 0,
         '@typescript-eslint/explicit-function-return-type': 0,
 
         'comma-style': [2, 'last'],

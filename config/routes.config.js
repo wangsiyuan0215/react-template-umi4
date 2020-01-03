@@ -6,6 +6,11 @@
 
 export default [
     {
+        path: '/login',
+        name: 'login',
+        component: './user/login',
+    },
+    {
         path: '/',
         component: '../layouts/Default/index',
         Routes: ['src/components/Common/Authorized/index'],

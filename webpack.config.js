@@ -19,7 +19,7 @@ module.exports = {
             components: require('path').resolve(__dirname, 'src/components'),
             '_.less': require('path').resolve(__dirname, 'src/resources/_.less')
         },
-        extensions: ['less', 'js', 'jsx']
+        extensions: ['less', 'js', 'jsx', 'ts', 'tsx']
     },
     modules: [
         'node_modules',

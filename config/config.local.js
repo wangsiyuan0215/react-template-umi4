@@ -6,6 +6,10 @@
 
 export default {
     proxy: {
+        '/passport-rbac/pub': {
+            target: 'http://10.9.43.232:8888',
+            changeOrigin: true
+        },
         '/api/v1/monitor': {
             // target: 'http://10.9.43.38:8877',
             // target: 'http://172.20.27.233:14032',

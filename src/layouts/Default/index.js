@@ -16,10 +16,10 @@ import React, { createContext } from 'react';
 
 import Logo from '@/assets/logo@2x.png';
 import Footer from '@/components/Common/Footer';
-import HeaderHOF from '@/HOFs/layouts/HeaderHOF';
-import BreadcrumbHOF from '@/HOFs/layouts/BreadcrumbHOF';
-import DefaultLayoutHOF from '@/HOFs/layouts/DefaultHOF';
+import HeaderConnector from '@/connects/layouts/Header';
+import BreadcrumbConnector from '@/connects/layouts/Breadcrumb';
 import { IsLarge, IsSmall } from '@/resources/constant';
+import DefaultLayoutConnector from '@/connects/layouts/Default';
 
 import Menu from '../Components/Menu';
 import Breadcrumb from '../Components/Breadcrumb';
@@ -29,8 +29,8 @@ import styles from './index.less';
 
 const { Content } = Layout;
 
-const Bread = BreadcrumbHOF(Breadcrumb);
-const Header = HeaderHOF(HeaderComponent);
+const Bread = BreadcrumbConnector(Breadcrumb);
+const Header = HeaderConnector(HeaderComponent);
 const Context = createContext();
 
 class DefaultLayout extends React.PureComponent {
@@ -145,4 +145,4 @@ class DefaultLayout extends React.PureComponent {
     }
 }
 
-export default DefaultLayoutHOF(DefaultLayout);
+export default DefaultLayoutConnector(DefaultLayout);

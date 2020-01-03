@@ -7,7 +7,7 @@
 const userLocale = {
     'login.title': '登录',
 
-    'login.header': '豫事办・管理平台',
+    'login.header': 'DEMO・管理平台',
     'login.input.username.placeholder': '请输入账号',
     'login.input.password.placeholder': '请输入密码',
     'login.input.username.empty': '很抱歉，账号不能为空',

@@ -17,18 +17,18 @@ import {
 } from '@/utils/storage';
 import { ErrorTypes, Keys4storage } from '@/resources/constant';
 
-import { IBasicModel } from '@/types/index.d';
+import { BasicModel } from '@/types/index.d';
 
-export interface IState4model {
+export interface State4model {
     token: string;
-    keys4dropdown: Keys4dropdown[];
+    keys4dropdown?: Keys4dropdown[];
 }
 
 export enum Keys4dropdown {
     LOGOUT = 'logout'
 }
 
-const userModel: IBasicModel<IState4model> = {
+const userModel: BasicModel<State4model> = {
     namespace: 'user',
     state: {
         token: null,
@@ -47,12 +47,12 @@ const userModel: IBasicModel<IState4model> = {
         /**
          * 进入到 登录 页面后检查是否存在 token，如果存在则跳回到首页
          * @param errorCreator
-         * @param payload
          * @param put
          * @param call
          * @param select
          */
-        *checkingToken({ errorCreator }, { payload }, { put, call, select }) {
+        /* eslint consistent-return: 0 */
+        *checkingToken({ errorCreator }, _, { put, call, select }) {
             try {
                 const { token: tokenInCache } = yield select(({ user }) => user);
                 const tokenInStorage = getStorageForSomething(Keys4storage.token);
@@ -92,7 +92,7 @@ const userModel: IBasicModel<IState4model> = {
                 throw errorCreator(ErrorTypes.ERROR, error.message);
             }
         },
-        *logout({ errorCreator }, { payload }, { put, call }) {
+        *logout({ errorCreator }, _, { put, call }) {
             try {
                 yield put({ type: 'receive', payload: { token: null } });
                 removeStorageForSomething(Keys4storage.token);
@@ -104,6 +104,7 @@ const userModel: IBasicModel<IState4model> = {
                 throw errorCreator(ErrorTypes.ERROR, error.message);
             }
         },
+        /* eslint consistent-return: 0 */
         *handler4dropdownInHeader({ errorCreator }, { payload }, { put }) {
             try {
                 const { key } = payload || {};

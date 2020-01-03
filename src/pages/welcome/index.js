@@ -5,13 +5,6 @@
  */
 import React from 'react';
 
-import CustomIcon from 'components/Common/CustomIcon';
-
 import styles from './index.less';
 
-export default () => (
-    <div className={styles.container}>
-        WELCOME
-        <CustomIcon type="welcome" />
-    </div>
-);
+export default () => <div className={styles.container}>WELCOME</div>;

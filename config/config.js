@@ -19,9 +19,6 @@ export default {
     history: 'hash',
     publicPath: './',
     treeShaking: true,
-    /**
-     * webpack 相关配置
-     */
     alias: {
         /* eslint global-require:0 */
         '@': require('path').resolve(__dirname, '../src'),
@@ -42,8 +39,9 @@ export default {
         IS_DEV: APP_ENV === 'development',
         APP_ENV: APP_ENV || '',
         IS_TEST: APP_ENV === 'test',
-        IS_PROD: APP_ENV === 'production'
-        // ICONFONT_JS_URL: '//at.alicdn.com/t/font_1362182_ufmmrnxmvh.js'
+        IS_PROD: APP_ENV === 'production',
+        ICONFONT_JS_URL: '//at.alicdn.com/t/font_1362182_ufmmrnxmvh.js',
+        APP: 'APP_TEST_STRING'
     },
     plugins: [
         [
