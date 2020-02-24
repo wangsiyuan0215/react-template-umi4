@@ -16,10 +16,15 @@ requireAllFile(require.context('@/assets/icons', false, /\.svg$/));
 
 const loading = createLoading({ effects: true });
 
+const interceptors = (action, error, dispatch) => {
+    console.log(action);
+    console.log(error);
+};
+
 // eslint-disable-next-line import/prefer-default-export
 export const dva = {
     config: {
-        onError,
+        onError: onError(interceptors),
         onEffect: dvaEffectHelper({ errorCreator }, loading)
     }
 };

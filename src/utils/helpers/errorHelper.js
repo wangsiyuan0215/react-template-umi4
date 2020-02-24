@@ -3,6 +3,11 @@
  * @Date: 2019-12-13 11:54:19
  * @Description: errorHelper
  */
+/*
+ * @Editor: SiYuan Wang
+ * @Date: 2020-02-24 09:15:34
+ * @Description: errorHelper
+ */
 
 import curry from 'ramda/es/curry';
 import { notification } from 'antd';
@@ -17,7 +22,7 @@ const errorHandlers = Object.keys(ErrorTypes).reduce(
     {}
 );
 
-const errorsCurried = curry((handlers, error, dispatch) => {
+const errorsCurried = curry((handlers, interceptors, error, dispatch) => {
     // eslint-disable-next-line no-unused-expressions
     error && error.preventDefault();
     const { errorType = null, actionType = '', errorMessageCh = null } = error;
@@ -28,6 +33,9 @@ const errorsCurried = curry((handlers, error, dispatch) => {
             payload: { actionType, namespace: actionType.split('/')[0] }
         });
         dispatch({ type: `${actionType}/@@end`, payload: true });
+
+        // eslint-disable-next-line no-unused-expressions
+        typeof interceptors === 'function' && interceptors(actionType, error, dispatch);
     }
 
     if (!errorMessageCh) return false;
