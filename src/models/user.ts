@@ -63,7 +63,7 @@ const userModel: BasicModel<State4model> = {
                     return router.replace('/home');
                 }
             } catch (error) {
-                throw errorCreator(undefined, error.message);
+                throw errorCreator(undefined, error.message, error.from);
             }
         },
         *login({ errorCreator }, { payload }, { put, call }) {
@@ -89,7 +89,7 @@ const userModel: BasicModel<State4model> = {
                     router.replace('/home');
                 }
             } catch (error) {
-                throw errorCreator(ErrorTypes.ERROR, error.message);
+                throw errorCreator(ErrorTypes.ERROR, error.message, error.from);
             }
         },
         *logout({ errorCreator }, _, { put, call }) {
@@ -101,7 +101,7 @@ const userModel: BasicModel<State4model> = {
                 yield call(delay, 2000);
                 router.replace('/login');
             } catch (error) {
-                throw errorCreator(ErrorTypes.ERROR, error.message);
+                throw errorCreator(ErrorTypes.ERROR, error.message, error.from);
             }
         },
         /* eslint consistent-return: 0 */
@@ -111,7 +111,7 @@ const userModel: BasicModel<State4model> = {
 
                 if (key === Keys4dropdown.LOGOUT) return yield put({ type: 'logout' });
             } catch (error) {
-                throw errorCreator(ErrorTypes.ERROR, error.message);
+                throw errorCreator(ErrorTypes.ERROR, error.message, error.from);
             }
         }
     },

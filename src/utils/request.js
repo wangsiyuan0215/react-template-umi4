@@ -6,7 +6,7 @@
 import umiRouter from 'umi/router';
 import { extend } from 'umi-request';
 
-import { SuccessCode } from '@/resources/constant';
+import { SuccessCode, ErrorFromTypes } from '@/resources/constant';
 
 const codeMessage = {
     400: 'There was an error with the request that the server did not make new or modified data.',
@@ -39,7 +39,11 @@ const errorHandler = error => {
             umiRouter.replace(`/exception/${response.status}`);
         }, 1000);
 
-    throw new Error(codeMessage[response.status] || message || response.statusText);
+    // eslint-disable-next-line no-throw-literal
+    throw {
+        from: ErrorFromTypes.REQUEST,
+        message: codeMessage[response.status] || message || response.statusText
+    };
 };
 
 /**
@@ -64,7 +68,11 @@ request.interceptors.response.use(async response => {
     if ([200, 201, 202, 204, 555, 599].includes(Number(status))) {
         const result = await clone.json();
         if (result.code && result.code !== SuccessCode)
-            throw new Error(result.msg || result.message || result.title || '123123123');
+        // eslint-disable-next-line no-throw-literal
+            throw {
+                from: ErrorFromTypes.REQUEST,
+                message: result.msg || result.message || result.title || '~!#￥￥%……&&%%##%%##!@'
+            };
     }
 
     return response;

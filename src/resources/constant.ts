@@ -42,4 +42,9 @@ export enum Channels {
     MOBILE = 'MOBILE'
 }
 
+export enum ErrorFromTypes {
+    NORMAL = 'NORMAL',
+    REQUEST = 'REQUEST'
+}
+
 export const SuccessCode = 200;
