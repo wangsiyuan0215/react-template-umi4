@@ -69,7 +69,7 @@ export default class BaseMenu extends PureComponent {
                     title={
                         item.icon ? (
                             <span>
-                                {getIcon(item.icon)}
+                                {getIcon(item.icon, item.size)}
                                 <span>{name}</span>
                             </span>
                         ) : (
