@@ -32,6 +32,7 @@ module.exports = {
         IS_DEV: true,
         IS_TEST: true,
         IS_PROD: true,
+        globalThis: true,
         ICONFONT_JS_URL: true
     },
     rules: {
