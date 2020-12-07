@@ -1,4 +1,11 @@
+/*
+ * @Date: 2020/12/7 5:07 PM
+ * @Description: jest.config
+ */
 module.exports = {
-  testURL: 'http://localhost:8000',
-  preset: 'jest-puppeteer',
+    preset: 'jest-puppeteer',
+    testURL: 'http://localhost:8000',
+    moduleNameMapper: {
+        '@/(.*)$': '<rootDir>/src/$1'
+    }
 };

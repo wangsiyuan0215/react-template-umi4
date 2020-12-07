@@ -18,7 +18,6 @@ requireAllFile(require.context('@/assets/icons', false, /\.svg$/));
 const loading = createLoading({ effects: true });
 
 const interceptors = (error, dispatch) => {
-    console.log(error);
     const { actionType = '', from } = error;
 
     switch (actionType) {
