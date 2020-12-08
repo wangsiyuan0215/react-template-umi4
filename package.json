@@ -19,8 +19,7 @@
     "lint": "eslint --ext .js src mock tests && npm run lint:style",
     "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
     "lint-staged": "lint-staged",
-    "lint-staged:js": "eslint --ext .js",
-    "test": "jest"
+    "lint-staged:js": "eslint --ext .js"
   },
   "dependencies": {
     "ant-design-pro": "2.3.2",
@@ -47,16 +46,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "7.12.7",
-    "@babel/preset-env": "7.12.7",
-    "@babel/preset-react": "7.12.7",
-    "@babel/preset-typescript": "7.12.7",
     "@typescript-eslint/eslint-plugin": "2.8.0",
     "@typescript-eslint/parser": "2.8.0",
     "babel-eslint": "9.0.0",
-    "babel-jest": "26.6.3",
     "cross-env": "5.2.0",
-    "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.5",
     "eslint": "5.16.0",
     "eslint-config-airbnb": "17.1.1",
     "eslint-config-prettier": "4.2.0",
@@ -71,8 +64,6 @@
     "file-loader": "5.0.2",
     "husky": "1.3.1",
     "jest": "26.6.3",
-    "jest-enzyme": "7.1.2",
-    "jest-transform-stub": "2.0.0",
     "lint-staged": "8.1.5",
     "prettier": "1.15.2",
     "react-test-renderer": "16.9.0",
@@ -87,7 +78,6 @@
     "svg-sprite-loader": "4.1.6",
     "svgo": "1.3.2",
     "svgo-loader": "2.2.1",
-    "ts-jest": "26.4.4",
     "typescript": "3.7.2"
   },
   "lint-staged": {
