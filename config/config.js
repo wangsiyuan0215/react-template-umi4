@@ -102,6 +102,7 @@ export default {
             .loader('svgo-loader')
             .options(svgoConfig);
     },
+    extraBabelPlugins: ['@babel/plugin-proposal-optional-chaining'],
     urlLoaderExcludes: [iconPath],
     lessLoaderOptions: {
         javascriptEnabled: true

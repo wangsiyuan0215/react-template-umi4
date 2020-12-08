@@ -1,4 +1,4 @@
-import { urlToList } from './pathTools';
+import { urlToList } from '@/layouts/Components/Menu/_utils/pathTools';
 
 describe('test urlToList', () => {
     it('A path', () => {
