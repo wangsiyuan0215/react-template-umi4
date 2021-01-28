@@ -124,6 +124,8 @@ export default class Menu extends React.PureComponent {
         return (
             <div
                 className={classNames(
+                    'bg-red-500',
+                    'bg-red-650',
                     styles.menu__container,
                     isMobile ? styles['menu__container--mobile'] : null
                 )}

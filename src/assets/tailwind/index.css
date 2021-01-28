@@ -1,0 +1,5 @@
+@layer base {
+    .bg-red-650 {
+        background-color: red !important;
+    }
+}

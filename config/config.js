@@ -7,6 +7,7 @@
 import path from 'path';
 import pageRoutes from './routes.config';
 import svgoConfig from './svgo-config';
+import postCssConfig from '../postcss.config';
 
 const { APP_ENV } = process.env;
 
@@ -30,10 +31,10 @@ export default {
         layouts: require('path').resolve(__dirname, '../src/layouts'),
         locales: require('path').resolve(__dirname, '../src/locales'),
         resources: require('path').resolve(__dirname, '../src/resources'),
-        components: require('path').resolve(__dirname, '../src/components')
+        components: require('path').resolve(__dirname, '../src/components'),
     },
     theme: {
-        'primary-color': '#538fff'
+        'primary-color': '#538fff',
     },
     define: {
         IS_DEV: APP_ENV === 'development',
@@ -41,44 +42,44 @@ export default {
         IS_TEST: APP_ENV === 'test',
         IS_PROD: APP_ENV === 'production',
         ICONFONT_JS_URL: '//at.alicdn.com/t/font_1362182_ufmmrnxmvh.js',
-        APP: 'APP_TEST_STRING'
+        APP: 'APP_TEST_STRING',
     },
     plugins: [
         [
             'umi-plugin-react',
             {
                 dll: {
-                    include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch', 'antd/es']
+                    include: ['dva', 'dva/router', 'dva/saga', 'dva/fetch', 'antd/es'],
                 },
                 dva: {
                     hmr: true,
-                    immer: true
+                    immer: true,
                 },
                 antd: true,
                 locale: {
                     enable: true, // default false
                     default: 'zh-CN', // default zh-CN
-                    baseNavigator: false // default true, when it is true, will use `navigator.language` overwrite default
+                    baseNavigator: false, // default true, when it is true, will use `navigator.language` overwrite default
                 },
                 dynamicImport: {
                     level: 2,
                     webpackChunkName: true,
-                    loadingComponent: './components/Common/Loading/index'
-                }
-            }
-        ]
+                    loadingComponent: './components/Common/Loading/index',
+                },
+            },
+        ],
     ],
     targets: {
         ios: 10,
         edge: 13,
         chrome: 49,
         safari: 10,
-        firefox: 45
+        firefox: 45,
     },
     manifest: {
-        basePath: '/'
+        basePath: '/',
     },
-    chainWebpack: config => {
+    chainWebpack: (config) => {
         config.resolve.modules.add(path.resolve(__dirname, '../src/resources'));
         config.resolve.extensions.add('less');
         config.module
@@ -89,7 +90,7 @@ export default {
             .use('svg')
             .loader('svg-sprite-loader')
             .options({
-                symbolId: 'icon-[name]'
+                symbolId: 'icon-[name]',
             });
 
         config.module
@@ -105,8 +106,8 @@ export default {
     extraBabelPlugins: ['@babel/plugin-proposal-optional-chaining'],
     urlLoaderExcludes: [iconPath],
     lessLoaderOptions: {
-        javascriptEnabled: true
+        javascriptEnabled: true,
     },
     ignoreMomentLocale: true,
-    disableRedirectHoist: true
+    disableRedirectHoist: true,
 };
