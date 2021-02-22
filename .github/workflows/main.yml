@@ -1,0 +1,25 @@
+# This is a basic workflow to help you get started with Actions
+
+name: react-template-demo-ci
+
+on:
+  push:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout from master branch
+        uses: actions/checkout@master
+      - name: run
+        uses: JamesIves/github-pages-deploy-action@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: master
+          FOLDER: build
+          BUILD_SCRIPT: npm install && npm run build
