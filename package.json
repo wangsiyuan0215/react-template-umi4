@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "description": "dome for react app",
     "private": true,
+    "homepage": "https://wangsiyuan0215.github.io/github-actions-demo",
     "scripts": {
         "start:dev": "cross-env APP_ENV=dev umi dev",
         "start:test": "cross-env APP_ENV=test umi dev",
