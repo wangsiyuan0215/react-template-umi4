@@ -17,9 +17,9 @@ jobs:
       - name: Checkout from master branch
         uses: actions/checkout@master
       - name: run
-        uses: JamesIves/github-pages-deploy-action@master
+        uses: JamesIves/github-pages-deploy-action@4.0.0
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: master
+          BRANCH: gh-page
           FOLDER: build
-          BUILD_SCRIPT: npm install && npm run build
+          BUILD_SCRIPT: npm install && npm run build:dev
