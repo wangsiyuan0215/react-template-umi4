@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: react-template-demo-ci
+name: react-template-ci
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout from master branch
+      - name: Checkout Master Branch 🎁
         uses: actions/checkout@master
         
       - name: Install and Build 🔧
@@ -22,8 +22,8 @@ jobs:
           npm install
           npm run build:dev
 
-      - name: Deployment
-        uses: JamesIves/github-pages-deploy-action@master
+      - name: Deployment 📦
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-page
