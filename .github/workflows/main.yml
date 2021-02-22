@@ -4,7 +4,8 @@ name: react-template-ci
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -14,8 +15,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Master Branch 🎁
-        uses: actions/checkout@master
+      - name: Checkout Master Branch 🛎️
+        uses: actions/checkout@2
+        with:
+          persist-credentials: false
         
       - name: Install and Build 🔧
         run: |
@@ -23,7 +26,7 @@ jobs:
           npm run build:dev
 
       - name: Deployment 📦
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@4.0.0
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-page
