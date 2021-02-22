@@ -16,10 +16,15 @@ jobs:
     steps:
       - name: Checkout from master branch
         uses: actions/checkout@master
-      - name: run
+        
+      - name: Install and Build 🔧
+        run: |
+          npm install
+          npm run build:dev
+
+      - name: Deployment
         uses: JamesIves/github-pages-deploy-action@master
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: master
+          BRANCH: gh-page
           FOLDER: build
-          BUILD_SCRIPT: npm install && npm run build
