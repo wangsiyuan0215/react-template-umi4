@@ -29,5 +29,5 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FLODER: build
+          FOLDER: build
           CLEAN: true
