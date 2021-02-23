@@ -42,11 +42,9 @@ export const base642Blob = urlData => {
     return new Blob([ab], { type: 'image/png' });
 };
 
-export const toUpperCaseWithCaptain = string =>
-    string.replace(/(^|\s)\w(?=\S*)/g, a => a.toLocaleUpperCase());
+export const toUpperCaseWithCaptain = string => string.replace(/(^|\s)\w(?=\S*)/g, a => a.toLocaleUpperCase());
 
-export const isFalsyValue = value =>
-    value === undefined || value === null || value === false || value === '';
+export const isFalsyValue = value => value === undefined || value === null || value === false || value === '';
 
 /* eslint no-sequences: ["off"] */
 /* eslint no-return-assign: ["off"] */
@@ -66,3 +64,5 @@ export const formatter4number = number => {
 
 // with require.context in webpack
 export const requireAllFile = context => context.keys().map(context);
+
+export const getPrimaryType = params => Object.prototype.toString.call(params).slice(8, -1);

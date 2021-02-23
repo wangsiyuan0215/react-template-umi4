@@ -10,27 +10,35 @@
  */
 
 import curry from 'ramda/es/curry';
-import { notification } from 'antd';
 
+import { getPrimaryType } from '@/utils/utils';
 import { ErrorTypes, ErrorFromTypes } from '@/resources/constant';
 
-const errorHandlers = Object.keys(ErrorTypes).reduce(
-    (accumulator, item) => ({
-        ...accumulator,
-        [ErrorTypes[item]]: message => notification[ErrorTypes[item]]({ message })
-    }),
-    {}
-);
+/**
+ *
+ * @param notifier
+ * @returns {{}}
+ */
+const errorHandlers = notifier =>
+    Object.keys(ErrorTypes).reduce(
+        (accumulator, item) => ({
+            ...accumulator,
+            [ErrorTypes[item]]: message => notifier[ErrorTypes[item]](message)
+        }),
+        {}
+    );
 
 /**
+ * @param notifier notifier 实例
  * @param interceptors { function(error, dispatch) }
  *  if interceptors returns false, it will block next process for error notification
  *  and if interceptors returns true, it will not do that.
  */
-const errorsCurried = curry((handlers, interceptors, error, dispatch) => {
+const errorsCurried = curry((notifier, interceptors, error, dispatch) => {
     // eslint-disable-next-line no-unused-expressions
     error && error.preventDefault();
     const { errorType = null, actionType = '', errorMessageCh = null } = error;
+    const notifications = errorHandlers(notifier);
 
     if (actionType) {
         dispatch({
@@ -43,12 +51,14 @@ const errorsCurried = curry((handlers, interceptors, error, dispatch) => {
     if (typeof interceptors === 'function' && !interceptors(error, dispatch)) return false;
 
     if (!errorMessageCh) return false;
-    if (errorType && handlers[errorType]) return handlers[errorType](errorMessageCh);
+    if (errorType && notifications[errorType]) return notifications[errorType](errorMessageCh);
 
-    return handlers[ErrorTypes.ERROR](errorMessageCh);
+    return notifications[ErrorTypes.ERROR](errorMessageCh);
 });
 
-const errorCreator = curry((actionType, type, message, from) => {
+const errorCreator = actionType => (type, message, from) => {
+    if (typeof message === 'undefined') if (getPrimaryType(type) === 'Object' && type.errorMessageCh) return type;
+
     const errorType = !type ? ErrorTypes.ERROR : type;
 
     return {
@@ -57,8 +67,8 @@ const errorCreator = curry((actionType, type, message, from) => {
         actionType,
         errorMessageCh: message
     };
-});
+};
 
-const _ = errorsCurried(errorHandlers);
+const _ = errorsCurried;
 
 export { _, errorCreator };

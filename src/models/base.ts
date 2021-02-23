@@ -4,18 +4,17 @@
  * @Description: user
  */
 // import router from 'umi/router';
-import { notification } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 
 import { delay } from '@/utils/utils';
 import { Keys4storage } from '@/resources/constant';
 import { getStorageForSomething } from '@/utils/storage';
 
-import { IBasicModel } from '@/types/index.d';
+import { BasicModel } from '@/types/index.d';
 
 const paths4ignoringToken = ['/login', '/exception/403', '/exception/404'];
 
-const userModel: IBasicModel<{}> = {
+const userModel: BasicModel<{}> = {
     namespace: 'base',
     state: {},
     effects: {
@@ -38,16 +37,15 @@ const userModel: IBasicModel<{}> = {
                 const tokenInStorage = getStorageForSomething(Keys4storage.token);
 
                 if (tokenInCache || tokenInStorage) {
-                    return tokenInCache
-                        ? false
-                        : yield put({ type: 'receive', payload: { token: tokenInStorage } });
+                    return tokenInCache ? false : yield put({ type: 'receive', payload: { token: tokenInStorage } });
                 }
 
                 yield call(delay, 200);
-                notification.error({ message: formatMessage({ id: 'error.no.token' }) });
+                throw errorCreator(undefined, formatMessage({ id: 'error.no.token' }), undefined);
+                // TODO... 仅是为了演示，如果真是适用到业务中请将下方的注释取消掉
                 // return router.replace('/login');
             } catch (error) {
-                throw errorCreator(undefined, error.message);
+                throw errorCreator(error);
             }
         }
     },

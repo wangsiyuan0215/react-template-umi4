@@ -3,7 +3,9 @@
  * @Description: app
  */
 
+import { message } from 'antd';
 import createLoading from 'dva-loading';
+
 import dvaEffectHelper from '@/utils/helpers/dvaEffectHelper';
 import { requireAllFile } from '@/utils/utils';
 import { ErrorFromTypes } from '@/resources/constant';
@@ -14,8 +16,6 @@ import { _ as onError, errorCreator } from '@/utils/helpers/errorHelper';
 // ICONFONT_JS_URL && CustomIcon.setScriptUrl(ICONFONT_JS_URL);
 
 requireAllFile(require.context('@/assets/icons', false, /\.svg$/));
-
-const loading = createLoading({ effects: true });
 
 const interceptors = (error, dispatch) => {
     const { actionType = '', from } = error;
@@ -34,7 +34,7 @@ const interceptors = (error, dispatch) => {
 // eslint-disable-next-line import/prefer-default-export
 export const dva = {
     config: {
-        onError: onError(interceptors),
-        onEffect: dvaEffectHelper({ errorCreator }, loading)
+        onError: onError(message, interceptors),
+        onEffect: dvaEffectHelper({ errorCreator }, createLoading({ effects: true }))
     }
 };
