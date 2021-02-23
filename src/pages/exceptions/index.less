@@ -1,0 +1,105 @@
+/*
+ * @Author: SiYuan Wang
+ * @Date: 2019-12-16 11:47:08
+ * @Description: index
+ */
+@import (reference) '~_.less';
+
+.exception {
+    display: flex;
+    align-items: center;
+    height: 80%;
+    min-height: 500px;
+    background-color: white;
+
+    .imgBlock {
+        flex: 0 0 50.5%;
+        width: 50.5%;
+        padding-right: 64px;
+        zoom: 1;
+        &::before,
+        &::after {
+            content: ' ';
+            display: table;
+        }
+        &::after {
+            clear: both;
+            height: 0;
+            font-size: 0;
+            visibility: hidden;
+        }
+    }
+
+    .imgEle {
+        float: right;
+        width: 100%;
+        max-width: 430px;
+        height: 360px;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: contain;
+    }
+
+    .content {
+        flex: auto;
+
+        h1 {
+            margin-bottom: 24px;
+            color: #434e59;
+            font-weight: bold;
+            font-size: 72px;
+            //font-family: @font-number;
+            line-height: 72px;
+        }
+
+        .desc {
+            margin-bottom: 8px;
+            color: @text-color-secondary;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .actions {
+            margin-top: 56px;
+
+            button {
+                width: 120px;
+                height: 40px;
+                font-size: 14px;
+                line-height: 38px;
+                letter-spacing: 1px;
+            }
+            button:not(:last-child) {
+                margin-right: 8px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: @screen-xl) {
+    .exception {
+        .imgBlock {
+            padding-right: 88px;
+        }
+    }
+}
+
+@media screen and (max-width: @screen-sm) {
+    .exception {
+        display: block;
+        text-align: center;
+        .imgBlock {
+            margin: 0 auto 24px;
+            padding-right: 0;
+        }
+    }
+}
+
+@media screen and (max-width: @screen-xs) {
+    .exception {
+        .imgBlock {
+            margin-bottom: -24px;
+            overflow: hidden;
+        }
+    }
+}

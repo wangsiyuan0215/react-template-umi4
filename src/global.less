@@ -1,0 +1,56 @@
+/*
+ * @Author: SiYuan Wang
+ * @Date: 2019-11-14 16:35:51
+ * @Description: global.less
+ */
+
+@import '~antd/lib/style/themes/default.less';
+@import (reference) '~_.less';
+
+html,
+body,
+#root {
+    height: 100%;
+    color: @blackColor;
+}
+
+body {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+canvas {
+    display: block;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+.colorWeak {
+    filter: invert(80%);
+}
+
+.globalSpin {
+    width: 100%;
+    margin: 40px 0 !important;
+}
+
+/* ant design fixed styles */
+.ant-layout {
+    min-height: 100vh;
+}
+
+.ant-btn {
+    line-height: 30px !important;
+}
+.ant-btn-sm {
+    line-height: 22px !important;
+}
+.ant-notification-notice-message {
+    margin-bottom: 0 !important;
+}

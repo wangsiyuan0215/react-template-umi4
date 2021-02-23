@@ -1,0 +1,72 @@
+/*
+ * @Editor: SiYuan Wang
+ * @Date: 2019-08-30 15:07:01
+ * @Description: index
+ */
+
+@import (reference) '~_.less';
+
+@pro-header-hover-bg: rgba(0, 0, 0, 0.025);
+
+.menu {
+    :global(.anticon) {
+        margin-right: 8px;
+    }
+    :global(.ant-dropdown-menu-item) {
+        min-width: 160px;
+    }
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    float: right;
+    height: 100%;
+    padding: 0 24px;
+    overflow: hidden;
+    cursor: pointer;
+
+    .account {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100%;
+
+        .avatar {
+            margin-left: 10px;
+        }
+    }
+}
+
+.dropdown__container > *:global(:not(.ant-dropdown-menu)) {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: @shadow-1-down;
+}
+
+@media screen and (max-width: @screen-xs) {
+    .dropdown__container {
+        width: 100% !important;
+    }
+    .dropdown__container > * {
+        border-radius: 0 !important;
+    }
+}
+
+@media only screen and (max-width: @screen-md) {
+    .header {
+        .right {
+            position: absolute;
+            top: 0;
+            right: 12px;
+            background: #fff;
+
+            .account {
+                .avatar {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+/*
+ * @Author: SiYuan Wang
+ * @Date: 2019-08-30 14:06:05
+ * @Description: Avatar styles
+ */
+
+@import (reference) '~_.less';
+
+.avatar__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    overflow: hidden;
+    background-color: @darkBlueColor;
+    border-radius: 50%;
+
+    & > span {
+        .cfl(white, 14px, 16px);
+    }
+}
