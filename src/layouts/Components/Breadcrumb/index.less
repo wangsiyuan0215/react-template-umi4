@@ -5,33 +5,44 @@
  */
 @import (reference) '~_.less';
 
+@breadcrumb-bg: @white;
+@breadcrumb-border-medium-color: #e8e8e8;
+
+:root {
+    --breadcrumb-bg: #fff;
+    --breadcrumb-border-medium-color: #e8e8e8;
+}
+
 .bread {
     position: relative;
     z-index: 99;
     display: flex;
     flex-grow: 0;
     flex-shrink: 0;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
     height: 54px;
     padding: 0 24px;
-    background-color: white;
-    border-bottom: solid 1px @mediumGrayColor;
+    background-color: @breadcrumb-bg;
+    background-color: var(--breadcrumb-bg);
+    border-bottom: solid 1px @breadcrumb-border-medium-color;
+    border-bottom: solid 1px var(--breadcrumb-border-medium-color);
 
     a[href] {
-        color: @lightBlueColor;
+        color: @primary-light-color;
+        color: var(--primary-light-color);
     }
 
     .actions {
         display: flex;
-        justify-content: flex-end;
         align-items: center;
+        justify-content: flex-end;
         margin-left: auto;
 
         .button {
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             min-width: 65px;
             height: 32px;
             margin: 0 0 0 20px;

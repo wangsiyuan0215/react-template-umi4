@@ -11,8 +11,8 @@
 
     .wrapper {
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         max-width: 1024px;
         min-height: 560px;
         padding: 16px 80px 16px 60px;
@@ -37,18 +37,18 @@
     }
     .interaction__container {
         display: flex;
+        flex-direction: column;
         flex-grow: 0;
         flex-shrink: 0;
-        flex-direction: column;
-        justify-content: center;
         align-items: stretch;
+        justify-content: center;
         width: 360px;
         margin: 0 0 0 80px;
 
         & > h1 {
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             margin-bottom: 70px;
             text-align: center;
             .cfl(#245dc1, 28px, 45px);
@@ -95,7 +95,8 @@
 }
 
 .icon__input {
-    color: @lightBlueColor;
+    color: @primary-light-color;
+    color: var(--primary-light-color);
     font-size: 15px;
 }
 

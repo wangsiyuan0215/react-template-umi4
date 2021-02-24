@@ -27,6 +27,9 @@ export default {
     creating: '创建',
     deleting: '删除',
 
+    'theme.changing': '更改主题',
+    'theme.resetting': '重置主题',
+
     ...zhCN.reduce(
         (acc, item) => ({
             ...acc,

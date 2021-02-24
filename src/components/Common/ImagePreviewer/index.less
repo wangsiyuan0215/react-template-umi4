@@ -6,6 +6,13 @@
 
 @import (reference) '~_.less';
 
+/* defaults variables */
+@previewer-mask-bg: rgba(0, 0, 0, 0.9);
+
+:root {
+    --previewer-mask-bg: rgba(0, 0, 0, 0.9);
+}
+
 .preview__container {
     position: fixed;
     top: 0;
@@ -15,12 +22,13 @@
     z-index: -10;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
     width: 0;
     height: 0;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: @previewer-mask-bg;
+    background-color: var(--previewer-mask-bg);
     opacity: 0;
 
     &.preview__container--active {
@@ -31,8 +39,8 @@
     }
     & > .header {
         display: flex;
-        justify-content: flex-start;
         align-items: center;
+        justify-content: flex-start;
         width: 100%;
         height: 66px;
         padding: 0 30px;
@@ -40,19 +48,21 @@
 
         .icon__header {
             margin-top: -2px;
-            color: white;
+            color: @white;
+            color: var(--white);
             font-size: 20px;
         }
         span {
             margin-left: 10px;
-            color: white;
+            color: @white;
+            color: var(--white);
             font-size: 14px;
             line-height: 20px;
         }
         .operations {
             display: flex;
-            justify-content: flex-start;
             align-items: center;
+            justify-content: flex-start;
             margin-left: auto;
 
             & > a {
@@ -62,7 +72,8 @@
                 cursor: pointer;
 
                 &:hover {
-                    color: @lightBlueColor;
+                    color: @primary-light-color;
+                    color: var(--primary-light-color);
                 }
             }
         }
@@ -70,11 +81,11 @@
     & > .inner {
         position: relative;
         display: flex;
+        flex-direction: column;
         flex-grow: 1;
         flex-shrink: 1;
-        flex-direction: column;
-        justify-content: flex-start;
         align-items: center;
+        justify-content: flex-start;
         width: 100%;
         height: 100%;
         padding: 54px 0;

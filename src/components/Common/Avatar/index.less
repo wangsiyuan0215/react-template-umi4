@@ -8,15 +8,17 @@
 
 .avatar__container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 44px;
     height: 44px;
     overflow: hidden;
-    background-color: @darkBlueColor;
+    background-color: @primary-color;
+    background-color: var(--primary-color);
     border-radius: 50%;
 
     & > span {
-        .cfl(white, 14px, 16px);
+        .cfl(@white, 14px, 16px);
+        .cfl(var(--white), 14px, 16px);
     }
 }

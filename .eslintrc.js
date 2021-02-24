@@ -33,6 +33,7 @@ module.exports = {
         IS_TEST: true,
         IS_PROD: true,
         globalThis: true,
+        PUBLIC_PATH: true,
         ICONFONT_JS_URL: true
     },
     rules: {

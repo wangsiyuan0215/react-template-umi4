@@ -11,13 +11,16 @@ import svgoConfig from './svgo-config';
 const { APP_ENV } = process.env;
 
 const iconPath = path.join(__dirname, '../src/assets/icons');
+const themeFromPath = path.join(__dirname, '../src/resources/themes');
+const themeToPath = path.join(__dirname, '../dist/themes');
+const publicPath = './';
 
 export default {
     hash: true,
     // 路由配置
     routes: pageRoutes,
     history: 'hash',
-    publicPath: './',
+    publicPath,
     treeShaking: true,
     alias: {
         /* eslint global-require:0 */
@@ -32,6 +35,15 @@ export default {
         resources: require('path').resolve(__dirname, '../src/resources'),
         components: require('path').resolve(__dirname, '../src/components')
     },
+    copy: [
+        {
+            from: `${themeFromPath}/*.css`,
+            to: `${themeToPath}/[name].[ext]`,
+            globOptions: {
+                ignore: ['default.css'],
+            },
+        }
+    ],
     theme: {
         'primary-color': '#538fff'
     },
@@ -41,7 +53,8 @@ export default {
         IS_TEST: APP_ENV === 'test',
         IS_PROD: APP_ENV === 'production',
         ICONFONT_JS_URL: '//at.alicdn.com/t/font_1362182_ufmmrnxmvh.js',
-        APP: 'APP_TEST_STRING'
+        APP: 'APP_TEST_STRING',
+        PUBLIC_PATH: publicPath
     },
     plugins: [
         [

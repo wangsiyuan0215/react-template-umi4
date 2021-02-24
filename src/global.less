@@ -7,11 +7,20 @@
 @import '~antd/lib/style/themes/default.less';
 @import (reference) '~_.less';
 
+/* base color variables */
+:root {
+    --black: black;
+    --white: white;
+    --primary-color: #245dc1;
+    --primary-light-color: #538fff;
+}
+
 html,
 body,
 #root {
     height: 100%;
-    color: @blackColor;
+    color: @black;
+    color: var(--black);
 }
 
 body {

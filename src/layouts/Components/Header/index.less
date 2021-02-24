@@ -6,14 +6,22 @@
 
 @import (reference) '~_.less';
 
-@pro-header-hover-bg: rgba(0, 0, 0, 0.025);
+@default-header-bg: @white;
+@default-header-shadow-color: rgba(0, 21, 41, 0.12);
+
+:root {
+    --default-header-bg: #fff;
+    --default-header-shadow-color: rgba(0, 21, 41, 0.12);
+}
 
 .header {
     position: relative;
     height: @layout-header-height;
     padding: 0;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0, 21, 41, 0.12);
+    background: @default-header-bg;
+    background: var(--default-header-bg);
+    box-shadow: 0 2px 6px @default-header-shadow-color;
+    box-shadow: 0 2px 6px var(--default-header-shadow-color);
 }
 
 @media only screen and (max-width: @screen-md) {

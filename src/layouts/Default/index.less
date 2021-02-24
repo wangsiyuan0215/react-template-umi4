@@ -1,12 +1,21 @@
 @import '../../../node_modules/antd/lib/style/themes/default.less';
+@import (reference) '~_.less';
+
+@default-layout-bg: #f0f2f5;
+
+:root {
+    --default-layout-bg: #f0f2f5;
+}
 
 .container {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     align-items: stretch;
+    justify-content: flex-start;
     height: 100%;
     overflow: hidden;
+    background: @default-layout-bg;
+    background: var(--default-layout-bg);
 
     .container__inner {
         width: calc(100% - 226px);
@@ -25,8 +34,8 @@
 .container--mobile {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: stretch;
+    justify-content: flex-start;
 
     .container__inner {
         padding-top: 0;

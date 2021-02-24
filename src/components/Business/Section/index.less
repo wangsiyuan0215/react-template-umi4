@@ -6,18 +6,25 @@
 
 @import (reference) '~_.less';
 
+@section-border-color: #eee;
+:root {
+    --section-border-color: #eee;
+}
+
 .container {
     background-color: white;
-    box-shadow: 0 4px 10px @lightGrayColor;
+    box-shadow: 0 4px 10px @section-border-color;
+    box-shadow: 0 4px 10px var(--section-border-color);
 
     .header {
         padding: 16px 24px;
-        border-bottom: solid 1px @lightGrayColor;
+        border-bottom: solid 1px @section-border-color;
+        border-bottom: solid 1px var(--section-border-color);
 
         .title {
             margin: 0;
-
-            .cfl(black, 16px, 24px);
+            .cfl(@black, 16px, 24px);
+            .cfl(var(--black), 16px, 24px);
         }
     }
 
