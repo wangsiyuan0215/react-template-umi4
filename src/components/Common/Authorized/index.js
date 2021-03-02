@@ -7,8 +7,9 @@
 import React from 'react';
 import Redirect from 'umi/redirect';
 import { connect } from 'dva';
-import renderAuthorize from 'ant-design-pro/lib/Authorized';
 import { getAuthority as getCurrentAuthority } from '@/utils/storage';
+
+import authorize from './authorize';
 
 const AuthorizedWrapper = props => {
     const {
@@ -33,7 +34,7 @@ const AuthorizedWrapper = props => {
         return getAuthority(pathname, routeData);
     };
     const routerConfig = getRouterAuthority(location.pathname, routes);
-    const Authorized = renderAuthorize(getCurrentAuthority());
+    const Authorized = authorize(getCurrentAuthority());
 
     return (
         <Authorized authority={routerConfig} noMatch={<Redirect to="/exception/403" />}>

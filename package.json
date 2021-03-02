@@ -23,7 +23,7 @@
         "lint-staged:js": "eslint --ext .js"
     },
     "dependencies": {
-        "ant-design-pro": "2.3.2",
+        "ant-design-pro": "^2.3.2",
         "antd": "3.22.0",
         "classnames": "2.2.6",
         "dva": "2.4.1",

@@ -4,10 +4,11 @@
  * @Description: menu model
  */
 
-import check from 'ant-design-pro/lib/Authorized/CheckPermissions';
 import equals from 'ramda/src/equals';
 import memoizeOne from 'memoize-one';
 import { formatMessage } from 'umi-plugin-react/locale';
+
+import checkPermissions from '@/components/Common/Authorized/checkPermissions';
 
 // Conversion router to menu.
 function formatter(data, parentAuthority, parentName) {
@@ -68,7 +69,7 @@ const filterMenuData = menuData => {
         menuData
             /** @param item {{hideInMenu: boolean}} */
             .filter(item => item.name && !item.hideInMenu)
-            .map(item => check(item.authority, getSubMenu(item)))
+            .map(item => checkPermissions(item.authority, getSubMenu(item)))
             .filter(item => item)
     );
 };
