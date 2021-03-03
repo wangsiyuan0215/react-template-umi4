@@ -4,22 +4,21 @@
  * @Description: global.less
  */
 
-@import '~antd/lib/style/themes/default.less';
 @import (reference) '~_.less';
 
 /* base color variables */
 :root {
     --black: black;
     --white: white;
-    --primary-color: #245dc1;
-    --primary-light-color: #538fff;
+    --theme-primary: #245dc1;
+    --theme-primary-50: #538fff;
 }
 
 html,
 body,
 #root {
     height: 100%;
-    color: @black;
+    color: @theme-black;
     color: var(--black);
 }
 
@@ -40,26 +39,4 @@ ol {
     list-style: none;
 }
 
-.colorWeak {
-    filter: invert(80%);
-}
-
-.globalSpin {
-    width: 100%;
-    margin: 40px 0 !important;
-}
-
-/* ant design fixed styles */
-.ant-layout {
-    min-height: 100vh;
-}
-
-.ant-btn {
-    line-height: 30px !important;
-}
-.ant-btn-sm {
-    line-height: 22px !important;
-}
-.ant-notification-notice-message {
-    margin-bottom: 0 !important;
-}
+@import './antd.fixed.less';

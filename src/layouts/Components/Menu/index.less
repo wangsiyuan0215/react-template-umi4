@@ -13,7 +13,7 @@
 @side-bar-selected-bg: #387ddf;
 @side-bar-nest-inner-bg: #334a73;
 @side-bar-logo-border-bottom-color: rgba(83, 143, 255, 0.3);
-@side-bar-text-color: @white;
+@side-bar-text-color: @theme-white;
 
 :root {
     --side-bar-menu-bg: #011329;
@@ -358,8 +358,8 @@
                 border-bottom: none;
             }
             & > .ant-menu-item-selected {
-                background-color: @primary-light-color !important;
-                background-color: var(--primary-light-color) !important;
+                background-color: @theme-primary-50 !important;
+                background-color: var(--theme-primary-50) !important;
                 border-bottom: none !important;
 
                 & > a {
@@ -380,8 +380,8 @@
                 }
 
                 &.ant-menu-submenu-selected {
-                    background-color: @primary-light-color;
-                    background-color: var(--primary-light-color);
+                    background-color: @theme-primary-50;
+                    background-color: var(--theme-primary-50);
                 }
             }
         }

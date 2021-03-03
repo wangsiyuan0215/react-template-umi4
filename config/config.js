@@ -45,7 +45,7 @@ export default {
         }
     ],
     theme: {
-        'primary-color': '#538fff'
+        'theme-primary': '#538fff'
     },
     define: {
         IS_DEV: APP_ENV === 'development',

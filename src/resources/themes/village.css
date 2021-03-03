@@ -6,8 +6,8 @@
 html:root {
     --white: white;
     --black: black;
-    --primary-color: #CE6D39;
-    --primary-light-color: #F17F42;
+    --theme-primary: #CE6D39;
+    --theme-primary-50: #F17F42;
 
     /* hover bg */
     --hover-bg-color: #FFEEE4;
@@ -19,7 +19,7 @@ html:root {
     --breadcrumb-border-medium-color: #e8e8e8;
 
     /* antd wave */
-    --antd-wave-shadow-color: var(--primary-light-color);
+    --antd-wave-shadow-color: var(--theme-primary-50);
 
     /* layout container */
     --pure-layout-bg: #f5f5f5;
@@ -39,12 +39,12 @@ html:root {
 
 /* others antd class and colors */
 .ant-btn:hover, .ant-btn:focus {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
+    color: var(--theme-primary);
+    border-color: var(--theme-primary);
 }
 .ant-btn-primary {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
+    background-color: var(--theme-primary) !important;
+    border-color: var(--theme-primary) !important;
 }
 .ant-btn-primary:hover, .ant-btn-primary:focus {
     background-color: var(--white) !important;
