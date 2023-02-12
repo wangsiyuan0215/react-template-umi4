@@ -1,6 +1,6 @@
 export const KEY_STORAGE = {
-    ROLE: `@@/${APP_NAME}/SYS_R`,
-    ORGS: `@@/${APP_NAME}/SYS_ORGS`,
+    ROLE: `@@/${APP_NAME}/R`,
+    TOKEN: `@@/${APP_NAME}/T`,
     DOWNLOAD: `@@/${APP_NAME}/D`
 };
 

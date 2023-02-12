@@ -59,6 +59,7 @@ module.exports = {
                 devDependencies: ['**/tests/**.js', '/mock/**/**.js', '**/**.test.js']
             }
         ],
+        'import/prefer-default-export': 0,
 
         'jsx-a11y/anchor-is-valid': 0,
         'jsx-a11y/click-events-have-key-events': 0,

@@ -4,7 +4,7 @@ import { extend } from 'umi-request';
 import { history } from 'umi';
 
 import { paths } from '@root/config/routes.config';
-import { ERROR_FROM_TYPES } from '@/resources/constant';
+import { ERROR_FROM_TYPES } from 'resources/constant.';
 
 const REFERENCES = {
     LOCKED: 'LOCKED',

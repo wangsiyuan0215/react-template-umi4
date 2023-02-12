@@ -1,11 +1,7 @@
-/* eslint-disable camelcase, @typescript-eslint/camelcase */
-import request from '@/utils/request';
+import { generatorAPIS } from '@/utils/request';
 
-import type { IUser } from '@/types/user';
+const userApis = {
+    getUserInfo: 'GET /user-info'
+};
 
-// eslint-disable-next-line import/prefer-default-export
-export function authGetUserInfo<T extends IUser>(): Promise<T> {
-    return request<T>(`/user-info`, {
-        method: 'GET'
-    });
-}
+export default generatorAPIS<keyof typeof userApis>(userApis);
