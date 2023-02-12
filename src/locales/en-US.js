@@ -1,7 +1,17 @@
-/*
- * @Author: SiYuan Wang
- * @Date: 2019-08-21 10:09:23
- * @Description: en-US
- */
+import { requireAllFile } from '@/utils';
 
-export default {};
+/** @typedef require {{ context }} */
+const enUS = requireAllFile(require.context('@/locales/en-US/', true, /\.(ts|js)$/));
+
+export default {
+    'app.logo.text': 'LOGO',
+    'app.document.title': APP_NAME,
+
+    ...enUS.reduce(
+        (acc, item) => ({
+            ...acc,
+            ...item.default
+        }),
+        {}
+    )
+};

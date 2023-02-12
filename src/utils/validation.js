@@ -1,8 +1,3 @@
-/*
- * @Author: SiYuan Wang
- * @Date: 2019-03-16 14:05:41
- * @Description: validation
- */
 import map from 'ramda/src/map';
 import has from 'ramda/src/has';
 import type from 'ramda/src/type';
@@ -23,12 +18,10 @@ const invariant = (condition, format, a, b, c, d, f) => {
     }
 };
 
-const isEmpty = prop => prop === null || prop === '' || typeof prop === 'undefined';
+const isEmpty = (prop) => prop === null || prop === '' || typeof prop === 'undefined';
 
 // requirement :: object -> any -> string | boolean
-const requirement = curry((rule, prop) =>
-    rule.isRequired && isEmpty(prop) ? rule.emptyMessage : false
-);
+const requirement = curry((rule, prop) => (rule.isRequired && isEmpty(prop) ? rule.emptyMessage : false));
 
 // validation :: object -> any -> string | boolean
 const validation = curry((rule, prop) => {
@@ -39,17 +32,11 @@ const validation = curry((rule, prop) => {
     switch (type(rule.validate)) {
         case 'Function':
             if (!rule.validate(prop)) {
-                return type(rule.errorMessage) === 'Array'
-                    ? rule.errorMessage[0]
-                    : rule.errorMessage;
+                return type(rule.errorMessage) === 'Array' ? rule.errorMessage[0] : rule.errorMessage;
             }
             return false;
         case 'Array':
-            invariant(
-                type(rule.errorMessage) === 'Array',
-                'rules.%s.errorMessage should be Array type.',
-                prop
-            );
+            invariant(type(rule.errorMessage) === 'Array', 'rules.%s.errorMessage should be Array type.', prop);
 
             invariant(
                 rule.validate.length === rule.errorMessage.length,
@@ -58,12 +45,7 @@ const validation = curry((rule, prop) => {
             );
 
             return rule.validate.map((f, index) => {
-                invariant(
-                    type(f) === 'Function',
-                    'rules.%s.validate[%s] is not a Function.',
-                    prop,
-                    index
-                );
+                invariant(type(f) === 'Function', 'rules.%s.validate[%s] is not a Function.', prop, index);
                 if (!f(prop)) return rule.errorMessage[index];
                 return false;
             });
@@ -78,7 +60,7 @@ const validation = curry((rule, prop) => {
 const merge = (require, validate) => require || validate || false;
 
 // mapper :: (Object, Object) -> string -> string
-const mapper = (rules, context) => prop =>
+const mapper = (rules, context) => (prop) =>
     compose(
         converge(merge, [requirement(rules[prop]), validation(rules[prop])]),
         // currentProp => {
@@ -89,15 +71,15 @@ const mapper = (rules, context) => prop =>
         //     );
         //     return currentProp;
         // },
-        p => path(p.split('.'), context)
+        (p) => path(p.split('.'), context)
     )(prop);
 
 export default curry((props, rules, context) =>
     compose(
-        filter(x => x !== false),
+        filter((x) => x !== false),
         flatten,
         map(mapper(rules, context)),
-        filter(prop => has(prop, rules)),
+        filter((prop) => has(prop, rules)),
         concat([])
     )(props)
 );

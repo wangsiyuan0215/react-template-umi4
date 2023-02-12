@@ -1,29 +1,18 @@
-/*
- * @Author: SiYuan Wang
- * @Date: 2019-12-13 11:54:19
- * @Description: errorHelper
- */
-/*
- * @Editor: SiYuan Wang
- * @Date: 2020-02-24 10:18:30
- * @Description: errorHelper
- */
-
 import curry from 'ramda/es/curry';
 
-import { getPrimaryType } from '@/utils/utils';
-import { ErrorTypes, ErrorFromTypes } from '@/resources/constant';
+import { getPrimaryType } from '@/utils';
+import { ERROR_TYPES, ERROR_FROM_TYPES } from '@/resources/constant';
 
 /**
  *
  * @param notifier
  * @returns {{}}
  */
-const errorHandlers = notifier =>
-    Object.keys(ErrorTypes).reduce(
+const errorHandlers = (notifier) =>
+    Object.keys(ERROR_TYPES).reduce(
         (accumulator, item) => ({
             ...accumulator,
-            [ErrorTypes[item]]: message => notifier[ErrorTypes[item]](message)
+            [ERROR_TYPES[item]]: (message) => notifier[ERROR_TYPES[item]](message)
         }),
         {}
     );
@@ -37,8 +26,8 @@ const errorHandlers = notifier =>
 const errorsCurried = curry((notifier, interceptors, error, dispatch) => {
     // eslint-disable-next-line no-unused-expressions
     error && error.preventDefault();
-    const { errorType = null, actionType = '', errorMessageCh = null } = error;
-    const notifications = errorHandlers(notifier);
+    const { type = null, actionType = '', message = null } = error;
+    const notifications = errorHandlers(typeof notifier === 'function' ? notifier(error) : notifier);
 
     if (actionType) {
         dispatch({
@@ -50,22 +39,21 @@ const errorsCurried = curry((notifier, interceptors, error, dispatch) => {
 
     if (typeof interceptors === 'function' && !interceptors(error, dispatch)) return false;
 
-    if (!errorMessageCh) return false;
-    if (errorType && notifications[errorType]) return notifications[errorType](errorMessageCh);
+    if (!message) return false;
+    if (type && notifications[type]) return notifications[type](message);
 
-    return notifications[ErrorTypes.ERROR](errorMessageCh);
+    return notifications[ERROR_TYPES.ERROR](message);
 });
 
-const errorCreator = actionType => (type, message, from) => {
-    if (typeof message === 'undefined') if (getPrimaryType(type) === 'Object' && type.errorMessageCh) return type;
+const errorCreator = (actionType) => (type, message, from) => {
+    if (typeof message === 'undefined') if (getPrimaryType(type) === 'Object' && type.message) return type;
 
-    const errorType = !type ? ErrorTypes.ERROR : type;
-
+    const errorType = !type ? ERROR_TYPES.ERROR : type;
     return {
-        from: from || ErrorFromTypes.NORMAL,
-        errorType,
-        actionType,
-        errorMessageCh: message
+        from: from || ERROR_FROM_TYPES.NORMAL,
+        type: errorType,
+        message,
+        actionType
     };
 };
 

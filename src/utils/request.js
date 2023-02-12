@@ -1,81 +1,116 @@
-/**
- * request 网络请求工具
- * 更详细的 api 文档: https://github.com/umijs/umi-request
- */
-
-import umiRouter from 'umi/router';
+import qs from 'qs';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { extend } from 'umi-request';
+import { history } from 'umi';
 
-import { SuccessCode, ErrorFromTypes } from '@/resources/constant';
+import { paths } from '@root/config/routes.config';
+import { ERROR_FROM_TYPES } from '@/resources/constant';
+
+const REFERENCES = {
+    LOCKED: 'LOCKED',
+    INVALID: 'INVALID',
+    EXISTED: 'EXISTED'
+};
 
 const codeMessage = {
     400: 'There was an error with the request that the server did not make new or modified data.',
-    401: '很抱歉，当前用户无权访问本系统，请重新登录',
-    403: '很抱歉，你所具备的权限无法访问当前接口',
-    404: '很抱歉，你所访问的资源未找到',
+    401: 'Sorry, access not allowed, please login.',
+    403: 'Sorry, access not allowed.',
+    404: 'Sorry, resource not found',
     406: 'The format of the request is not available.',
-    410: '很抱歉，你所访问的资源未找到',
-    422: '当创建一个对象时，发生一个验证错误。',
-    500: '很抱歉，服务器出错了，请稍后再试',
+    410: 'Sorry, the request requested is not found',
+    500: 'Sorry, internal server error. Please try again later.',
     502: 'Gateway error.',
-    503: '很抱歉，当前服务器目前正在维护，请稍后再试',
-    504: '很抱歉，请求超时.'
+    503: 'Sorry, server under maintenance. Please try again later.',
+    504: 'Sorry, request timeout',
+    // custom error type for response reference
+    [REFERENCES.LOCKED]: 'Sorry, current account is locked.',
+    [REFERENCES.INVALID]: 'Sorry, username or password is invalid. Please try again.',
+    [REFERENCES.EXISTED]: (data) => `Sorry, the user ${data}.`
 };
 
-/**
- * 当 response 的 status 非 20* 状态码时的异常处理
- */
 let limited = 0;
-/* eslint consistent-return: ["off"] */
-const errorHandler = error => {
-    const { response = {}, message } = error;
 
-    if (limited + 3000 > Date.now()) return;
+const LIMITED_DURATION = 3000;
+
+/* eslint consistent-return: 0, no-underscore-dangle: 0, no-unused-expressions: 0, no-throw-literal: 0 */
+export const errorHandler = (error) => {
+    const { response = {}, message, data } = error;
+    const code = Number(response.status);
+    const { reference = null } = data || {};
+    const {
+        location: { pathname, query }
+    } = history;
+
+    if (limited + LIMITED_DURATION > Date.now()) return;
 
     limited = Date.now();
 
-    if ([403, 404, 410].includes(Number(response.status)))
-        setTimeout(() => {
-            umiRouter.replace(`/exception/${response.status}`);
-        }, 1000);
+    if (code === 401) {
+        if (response.url.includes('auth/success')) {
+            // eslint-disable-next-line compat/compat
+            if (Object.values(paths.auth).includes(pathname)) {
+                throw {
+                    data, //! special property for auth
+                    from: ERROR_FROM_TYPES.REQUEST,
+                    status: response.status,
+                    message: data?.message || data
+                };
+            }
+        }
 
-    // eslint-disable-next-line no-throw-literal
+        // Just for visiting system first, if auth/success returns 401 code, redirect to login page.
+        if (pathname !== paths.auth.login) {
+            const { user: { isLoggingOut = false } = {} } = window.dvaApp._store.getState() || {};
+            if (isLoggingOut) return false;
+
+            window.dvaApp._store.dispatch({ type: 'user/clear' });
+            setTimeout(() => {
+                const queries = qs.stringify(query);
+                history.replace(
+                    `${paths.auth.login}?redirect=${encodeURIComponent(`${pathname}${queries ? `?${queries}` : ''}`)}`
+                );
+            }, 0);
+        } else if (!response.url.includes('auth/failure')) {
+            // Make error message disappear.
+            return;
+        }
+    }
+    if ([409, 410].includes(code)) {
+        if (data) {
+            // eslint-disable-next-line no-throw-literal
+            throw {
+                from: ERROR_FROM_TYPES.REQUEST,
+                status: response.status,
+                message: data.data
+            };
+        }
+        return;
+    }
+
+    if (code === 403) {
+        throw {
+            data,
+            from: ERROR_FROM_TYPES.REQUEST,
+            status: code,
+            message: data?.message || data
+        };
+    }
+
     throw {
-        from: ErrorFromTypes.REQUEST,
-        message: codeMessage[response.status] || message || response.statusText
+        from: ERROR_FROM_TYPES.REQUEST,
+        status: response.status,
+        message:
+            reference === REFERENCES.EXISTED
+                ? codeMessage[reference](data.data)
+                : codeMessage[reference ?? response.status] || message || response.statusText
     };
 };
 
-/**
- * 配置request请求时的默认参数
- */
 const request = extend({
-    // 默认错误处理
-    errorHandler,
-
-    // 默认请求是否带上cookie
-    credentials: 'include'
-});
-
-/**
- * 当 response 的 status 是 200 或 201 状态码时，对业务逻辑的异常处理
- */
-request.interceptors.response.use(async response => {
-    const clone = response.clone();
-
-    const { status } = clone;
-
-    if ([200, 201, 202, 204, 555, 599].includes(Number(status))) {
-        const result = await clone.json();
-        if (result.code && result.code !== SuccessCode)
-        // eslint-disable-next-line no-throw-literal
-            throw {
-                from: ErrorFromTypes.REQUEST,
-                message: result.msg || result.message || result.title || '~!#￥￥%……&&%%##%%##!@'
-            };
-    }
-
-    return response;
+    prefix: '',
+    credentials: 'include',
+    errorHandler
 });
 
 export default request;

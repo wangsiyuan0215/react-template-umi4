@@ -1,60 +1,75 @@
 {
     "name": "react-app",
     "version": "0.0.1",
-    "description": "dome for react app",
+    "test-version": "2023-02-07,18:46:18",
     "private": true,
-    "homepage": "https://wangsiyuan0215.github.io/react-template/index.html",
     "scripts": {
-        "start:dev": "cross-env APP_ENV=dev umi dev",
-        "start:test": "cross-env APP_ENV=test umi dev",
-        "start:pre": "cross-env APP_ENV=pre umi dev",
-        "start:prod": "cross-env APP_ENV=prod umi dev",
-        "start:no-mock": "cross-env MOCK=none umi dev",
-        "build:base": "umi build",
-        "build:dev": "cross-env APP_ENV=dev npm run build:base",
-        "build:test": "cross-env APP_ENV=test npm run build:base",
-        "build:pre": "cross-env APP_ENV=pre npm run build:base",
-        "build:prod": "cross-env APP_ENV=prod npm run build:base",
-        "analyze": "cross-env ANALYZE=1 umi build",
-        "lint:style": "stylelint \"src/**/*.less\" --syntax less",
-        "lint": "eslint --ext .js src mock tests && npm run lint:style",
-        "lint:fix": "eslint --fix --ext .js src mock tests && npm run lint:style",
-        "lint-staged": "lint-staged",
-        "lint-staged:js": "eslint --ext .js"
+        "start": "umi dev",
+        "build": "umi build",
+        "postinstall": "umi generate tmp",
+        "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+        "test": "umi-test",
+        "test:coverage": "umi-test --coverage",
+        "release:qa": "npx zx ./scripts/build.stage.mjs --quiet",
+        "release:prod": "npx zx ./scripts/build.prod.mjs --quiet"
+    },
+    "gitHooks": {
+        "pre-commit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.{md,json}": [
+            "prettier --write"
+        ],
+        "src/**/*.js?(x)": [
+            "eslint --ext .js",
+            "prettier --write"
+        ],
+        "*.ts?(x)": [
+            "eslint --ext .ts",
+            "prettier --parser=typescript --write"
+        ],
+        "src/**/*.less": [
+            "prettier --write",
+            "stylelint --syntax less"
+        ]
     },
     "dependencies": {
-        "ant-design-pro": "^2.3.2",
-        "antd": "3.22.0",
+        "@ant-design/icons": "4.6.4",
+        "@ant-design/pro-layout": "^6.5.0",
+        "antd": "4.20.7",
         "classnames": "2.2.6",
-        "dva": "2.4.1",
-        "dva-loading": "3.0.12",
-        "md5.js": "1.3.5",
-        "memoize-one": "4.0.3",
-        "moment": "2.24.0",
-        "path-to-regexp": "2.4.0",
-        "prop-types": "15.7.2",
-        "ramda": "0.26.1",
-        "react": "16.9.0",
-        "react-color": "2.17.3",
-        "react-container-query": "0.11.0",
-        "react-document-title": "2.0.3",
-        "react-dom": "16.9.0",
-        "redux": "3.7.2",
-        "redux-saga": "latest",
-        "umi": "2.12.0",
-        "umi-plugin-react": "1.14.5",
-        "umi-request": "1.2.10"
+        "dva-loading": "3.0.22",
+        "immer": "^9.0.19",
+        "lodash": "4.17.21",
+        "memoize-one": "^6.0.0",
+        "qs": "6.9.6",
+        "ramda": "^0.28.0",
+        "react": "17.x",
+        "react-dom": "17.x",
+        "umi": "^3.5.36",
+        "zustand": "^4.3.2"
     },
     "devDependencies": {
         "@babel/plugin-proposal-optional-chaining": "7.12.7",
+        "@types/jest": "26.0.20",
+        "@types/jquery": "3.5.13",
+        "@types/jquery-sortable": "0.9.31",
+        "@types/overlayscrollbars": "1.12.1",
+        "@types/ramda": "^0.28.22",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "@types/tableau-js-api": "^2.8.2",
         "@typescript-eslint/eslint-plugin": "2.8.0",
         "@typescript-eslint/parser": "2.8.0",
-        "babel-eslint": "9.0.0",
-        "cross-env": "5.2.0",
+        "@umijs/preset-react": "1.x",
+        "@umijs/test": "^3.5.36",
+        "autoprefixer": "9.8.8",
+        "cross-env": "7.0.3",
         "eslint": "5.16.0",
         "eslint-config-airbnb": "17.1.1",
         "eslint-config-prettier": "4.2.0",
         "eslint-config-umi": "1.5.0",
+        "eslint-import-resolver-typescript": "2.4.0",
         "eslint-plugin-babel": "5.3.0",
         "eslint-plugin-compat": "2.7.0",
         "eslint-plugin-import": "2.17.3",
@@ -62,13 +77,9 @@
         "eslint-plugin-markdown": "1.0.0",
         "eslint-plugin-react": "7.13.0",
         "eslint-plugin-react-hooks": "1.6.0",
-        "file-loader": "5.0.2",
-        "husky": "1.3.1",
-        "jest": "26.6.3",
-        "lint-staged": "8.1.5",
-        "prettier": "1.15.2",
-        "react-test-renderer": "16.9.0",
-        "redbox-react": "1.6.0",
+        "lint-staged": "^10.0.7",
+        "postcss": "7.0.39",
+        "prettier": "^2.2.0",
         "stylelint": "9.10.1",
         "stylelint-config-css-modules": "1.4.0",
         "stylelint-config-prettier": "5.1.0",
@@ -76,39 +87,11 @@
         "stylelint-config-standard": "18.3.0",
         "stylelint-declaration-block-no-ignored-properties": "1.1.0",
         "stylelint-order": "2.2.1",
-        "svg-sprite-loader": "4.1.6",
+        "svg-sprite-loader": "^6.0.11",
         "svgo": "1.3.2",
         "svgo-loader": "2.2.1",
-        "typescript": "3.7.2"
-    },
-    "lint-staged": {
-        "src/**/*.js": [
-            "eslint --fix --ext .js",
-            "prettier --write",
-            "git add"
-        ],
-        "src/**/*.ts": [
-            "eslint --fix --ext .ts",
-            "prettier --write",
-            "git add"
-        ],
-        "src/**/*.tsx": [
-            "eslint --fix --ext .tsx",
-            "prettier --write",
-            "git add"
-        ],
-        "src/**/*.less": [
-            "stylelint --syntax less",
-            "prettier --write",
-            "git add"
-        ]
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "engines": {
-        "node": ">=8.0.0"
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@2.2.17",
+        "typescript": "^4.1.2",
+        "yorkie": "^2.0.0"
     }
 }

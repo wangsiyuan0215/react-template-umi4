@@ -1,30 +1,21 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "importHelpers": true,
-        "jsx": "react",
-        "esModuleInterop": true,
-        "sourceMap": true,
-        "baseUrl": ".",
-        "experimentalDecorators": false,
-        "emitDecoratorMetadata": false,
+        "jsx": "react-jsx",
         "paths": {
             "@/*": ["src/*"],
-            "root/*": ["./*"],
-            "utils/*": ["./src/utils/*"],
-            "pages/*": ["./src/pages/*"],
-            "assets/*": ["./src/assets/*"],
-            "models/*": ["./src/models/*"],
-            "layouts/*": ["./src/layouts/*"],
-            "locales/*": ["./src/locales/*"],
-            "resources/*": ["./src/resources/*"],
-            "components/*": ["./src/components/*"]
+            "@@/*": ["src/.umi/*"],
+            "@root/*": ["*"]
         },
+        "target": "esnext",
+        "module": "esnext",
+        "strict": false,
+        "baseUrl": "./",
+        "sourceMap": true,
+        "importHelpers": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
         "allowSyntheticDefaultImports": true
     },
-    "exclude": [
-        "node_modules" // 这个目录下的代码不会被 typescript 处理
-    ]
+    "include": ["mock/**/*", "src/**/*", "config/**/*", ".umirc.ts", "typings.d.ts", "src/types/*.d.ts"],
+    "exclude": ["node_modules", "lib", "es", "dist", "typings", "**/__test__", "test", "docs", "tests"]
 }
