@@ -1,5 +1,5 @@
 import React from 'react';
-import { getDvaApp } from 'umi';
+import { getDvaApp } from '@umijs/max';
 
 export default () => {
     React.useEffect(() => {

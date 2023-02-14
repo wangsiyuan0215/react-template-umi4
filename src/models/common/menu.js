@@ -1,6 +1,6 @@
 import memoizeOne from 'memoize-one';
 import { equals } from 'ramda';
-import { getIntl } from 'umi';
+import { getIntl } from '@umijs/max';
 
 // Conversion router to menu.
 function formatter(data, parentName) {

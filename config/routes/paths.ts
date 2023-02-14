@@ -1,6 +1,5 @@
 // Paths
 export default {
-    root: {
-        root: '/'
-    }
+    root: '/',
+    welcome: '/welcome'
 };

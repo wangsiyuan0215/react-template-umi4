@@ -1,5 +1,5 @@
+import { isArray, isEmpty, isObject, omit } from 'lodash';
 import qs from 'qs';
-import { omit, isObject, isArray, isEmpty } from 'lodash';
 
 const injectPathQueriesIntoUrl = (url: string, pathQueries: Record<string, string>) => {
     return url.replace(/{(.*)}/g, (_, b) => {
@@ -55,9 +55,10 @@ export const transfer = (request) => (requestString: string) => {
         const finalUrl = hasPathQueries ? injectPathQueriesIntoUrl(url, path) : url;
         const finalQueries = queryKeys ? qs.stringify(query) : '';
 
-        return request[method.toLocaleLowerCase()](
+        return request(
             {
                 url: `${finalUrl}${finalQueries ? `?${finalQueries}` : ''}`,
+                method: method.toLocaleLowerCase(),
                 ...(isObject(data) && !isArray(data) && isEmpty(data) ? {} : { params: data }),
                 ...omit(otherAxiosConfig, ['url', 'params'])
             },

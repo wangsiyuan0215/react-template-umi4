@@ -1,10 +1,8 @@
-// UmiJs 3.x
+import { defineConfig } from '@umijs/max';
 import path from 'path';
-import { defineConfig } from 'umi';
 
-// eslint-disable-next-line import/no-unresolved
 import pack from '../package.json';
-import routes from './routes.config';
+import routes from './routes';
 import svgoConfig from './svgo-config.json';
 
 const { UMI_ENV } = process.env;
@@ -18,21 +16,26 @@ const jqueryScriptUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jque
 
 export default defineConfig({
     dva: {
-        hmr: true,
-        immer: true,
+        immer: {},
         skipModelValidate: true
+    },
+    antd: {
+        style: 'less',
+        import: true,
+        compact: true
     },
     hash: true,
     mfsu: {
-        development: {
-            output: '.mfsu'
-        }
+        cacheDirectory: require('path').resolve(__dirname, '../.mfsu')
     },
+    mock: {},
     alias: {
         /* eslint global-require:0 */
         '@': require('path').resolve(__dirname, '../src'),
         '@root': require('path').resolve(__dirname, '../')
     },
+    model: {},
+    access: {},
     define: {
         IS_QA: isQa,
         IS_DEV: isDev,
@@ -45,7 +48,7 @@ export default defineConfig({
         baseNavigator: false
     },
     layout: {
-        name: pack.name,
+        title: pack.name.toString().toUpperCase(),
         locale: true,
         layout: 'side'
     },
@@ -56,15 +59,12 @@ export default defineConfig({
         javascriptEnabled: true
     },
     publicPath: '/',
-    fastRefresh: {},
+    fastRefresh: true,
+    initialState: {},
     extraBabelPlugins: ['@babel/plugin-proposal-optional-chaining'],
     ignoreMomentLocale: true,
     // eslint-disable-next-line import/no-extraneous-dependencies
     extraPostCSSPlugins: [require('tailwindcss'), require('autoprefixer')],
-    nodeModulesTransform: {
-        type: 'none'
-    },
-    extraBabelIncludes: ['parse5'],
     chainWebpack: (config) => {
         config.resolve.modules.add(path.resolve(__dirname, '../src/resources'));
         config.resolve.extensions.add('less');

@@ -3,8 +3,7 @@ function containsAny(arr1, arr2) {
 }
 
 export default (state) => {
-    const { grantedAuthorities } = state || {};
-    const authorities = grantedAuthorities.map((item) => item.authority);
+    const { authorities } = state || {};
     return {
         ...state,
         $$access: {
