@@ -27,22 +27,6 @@ declare module 'classnames' {
     export default classNames;
 }
 
-type Effector = (error: any, action: import('redux').AnyAction, effects: import('dva').EffectsCommandMap) => any;
-type EffectType = 'takeEvery' | 'takeLatest' | 'watch' | 'throttle';
-
-declare interface IBasicModel<T extends any, N = string> {
-    namespace: N;
-    state?: T;
-    subscriptions?: { setup: import('umi').Subscription } & Record<string, import('umi').Subscription>;
-    effects?: {
-        [key: string]: Effector | Array<Effector | { type: EffectType }>;
-    };
-    reducers?: {
-        receive?: import('umi').ImmerReducer<T>;
-        [key: string]: import('umi').ImmerReducer<T>;
-    };
-}
-
 interface IBasicItem {
     id: number | string;
     [key: string]: any;

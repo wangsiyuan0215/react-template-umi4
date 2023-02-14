@@ -52,7 +52,7 @@ module.exports = {
         UMI_ENV: true,
         APP_NAME: true
     },
-    plugins: ['@typescript-eslint', 'react', 'compat', 'import', 'jsx-a11y', 'markdown', 'react-hooks'],
+    plugins: ['@typescript-eslint', 'node', 'react', 'compat', 'import', 'jsx-a11y', 'markdown', 'react-hooks'],
     settings: {
         polyfills: ['fetch', 'Promise', 'url', 'object-assign'],
         'import/resolver': {
