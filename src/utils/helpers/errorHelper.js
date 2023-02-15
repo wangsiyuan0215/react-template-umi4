@@ -1,7 +1,7 @@
 import curry from 'ramda/es/curry';
 
+import { ERROR_TYPES } from '@/resources/constant';
 import { getPrimaryType } from '@/utils';
-import { ERROR_TYPES, ERROR_FROM_TYPES } from '@/resources/constant';
 
 /**
  *
@@ -45,12 +45,11 @@ const errorsCurried = curry((notifier, interceptors, error, dispatch) => {
     return notifications[ERROR_TYPES.ERROR](message);
 });
 
-const errorCreator = (actionType) => (type, message, from) => {
+const errorCreator = (actionType) => (type, message) => {
     if (typeof message === 'undefined') if (getPrimaryType(type) === 'Object' && type.message) return type;
 
     const errorType = !type ? ERROR_TYPES.ERROR : type;
     return {
-        from: from || ERROR_FROM_TYPES.NORMAL,
         type: errorType,
         message,
         actionType
