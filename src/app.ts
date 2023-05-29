@@ -1,7 +1,3 @@
-/*
- * @Date: 2019-05-06 09:22:20
- * @Description: app
- */
 import { message } from 'antd';
 import createLoading from 'dva-loading';
 

@@ -10,7 +10,7 @@ export default [
         name: 'Welcome',
         path: paths.welcome,
         access: 'canAccessSystem',
-        wrappers: ['@/Accesses/Welcome', '@/Layouts/Welcome'],
+        wrappers: ['@/Accesses/default', '@/Layouts/Default'],
         component: '@/pages/Welcome'
     }
 ];
