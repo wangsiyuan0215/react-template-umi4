@@ -11,9 +11,9 @@ const SEPARATOR = /\s{1,}/;
 const COMMON_PATTERN = '*';
 const IF_DATA_IS_ARRAY = /\s\[d|(data)]\s?/;
 const IF_DATA_IS_FORM_DATA = /\s(d|(data))\.(f|formData):/;
-const MATCH_DATA_STRING = /(?<=\s(d|(data))(\.(f|formData))?:)(\S*)/;
-const MATCH_PATH_STRING = /(?<=\spath:)(\S*)/;
-const MATCH_QUERY_STRING = /(?<=\s(q|query):)(\S*)/;
+const MATCH_DATA_STRING = new RegExp('(?<=\\s(d|(data))(\\.(f|formData))?:)(\\S*)');
+const MATCH_PATH_STRING = new RegExp('(?<=\\spath:)(\\S*)');
+const MATCH_QUERY_STRING = new RegExp('(?<=\\s(q|query):)(\\S*)');
 
 const getNewObjectByKeysFrom = (target: Record<string, any>, keys: string[]) =>
     keys.reduce((acc: Record<string, any>, key: string) => ({ ...acc, [key]: target[key] }), {});
