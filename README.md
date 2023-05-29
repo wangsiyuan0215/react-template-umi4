@@ -1,4 +1,4 @@
-# @capgemini-daimler/react-stage
+# @siyuan0215/react-stage
 
 主要基于 react v18 和 umijs@v4 创建的脚手架，基础组件库使用 `antd@^4.0.0` 版本。
 
@@ -26,8 +26,10 @@ export default defineConfig({
 
 ## 🤝 开发约定：
 
-* [布局与菜单](./docs/layout_and_menu.md)
-* [状态管理](./docs/state_mangement.md)
+* [配置](./docs/config.md)；
+* [资源](./docs/assets.md)；
+* [布局与菜单](./docs/layout_and_menu.md)；
+* [状态管理](./docs/state_mangement.md)；
 
 ---
 *To be continue...*

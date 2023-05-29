@@ -3,7 +3,13 @@ import { requestCreator } from '@/utils/request/request';
 
 export type ApiResponseData<T> = Promise<IBasicResponse<T>>;
 
-const apiTransfer = transfer(requestCreator({}));
+const apiTransfer = transfer(
+    requestCreator({
+        // request interceptors
+        // response interceptors
+        // TODO... and so on
+    })
+);
 
 const generatorAPIS = <T extends string>(apis: Record<string, string>) =>
     Object.keys(apis).reduce((acc, key) => {
