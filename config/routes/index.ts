@@ -6,12 +6,20 @@ export default [
         redirect: paths.welcome
     },
     {
-        icon: 'DashboardOutlined',
-        name: 'Welcome',
-        path: paths.welcome,
+        name: 'root',
+        path: paths.root,
         access: 'canAccessSystem',
-        wrappers: ['@/Accesses/default', '@/Layouts/Default'],
-        component: '@/pages/Welcome'
+        wrappers: ['@/Accesses/default'],
+        component: '@/layouts/default',
+        routes: [
+            {
+                icon: 'DashboardOutlined',
+                name: 'Welcome',
+                path: paths.welcome,
+                access: 'canAccessSystem',
+                component: '@/pages/Welcome'
+            }
+        ]
     }
 ];
 
