@@ -58,7 +58,7 @@ export const transfer = (request) => (requestString: string) => {
         return request(
             {
                 url: `${finalUrl}${finalQueries ? `?${finalQueries}` : ''}`,
-                method: method.toLocaleLowerCase(),
+                method: method.toLocaleUpperCase(),
                 ...(isObject(data) && !isArray(data) && isEmpty(data) ? {} : { params: data }),
                 ...omit(otherAxiosConfig, ['url', 'params'])
             },
