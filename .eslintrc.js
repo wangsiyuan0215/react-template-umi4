@@ -17,8 +17,7 @@ module.exports = {
         'import/no-extraneous-dependencies': [
             2,
             {
-                optionalDependencies: true,
-                devDependencies: ['**/tests/**.js', '/mock/**/**.js', '**/**.test.js']
+                devDependencies: true
             }
         ],
         'import/prefer-default-export': 0,

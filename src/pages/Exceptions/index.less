@@ -1,0 +1,38 @@
+@import (reference) '~@/resources/_.less';
+
+.exception__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: @white;
+
+    & > div {
+        margin-top: -100px;
+    }
+
+    p {
+        @apply text-gray-500;
+    }
+
+    .exception__title {
+        width: 500px;
+        margin: 10px 0 0;
+        color: @heading-color;
+        font-weight: bold;
+        font-size: 24px;
+        font-family: @font;
+        line-height: 1.5;
+        text-align: center;
+
+        small {
+            @apply text-gray-300;
+            font-weight: normal;
+            font-size: 14px;
+        }
+    }
+
+    .btn {
+        margin-top: 15px;
+    }
+}

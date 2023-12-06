@@ -2,7 +2,7 @@ import { defineConfig } from '@umijs/max';
 import path from 'path';
 
 import pack from '../package.json';
-import routes from './routes';
+import routes from '../src/routes';
 import svgoConfig from './svgo-config.json';
 
 const { UMI_ENV } = process.env;
@@ -47,11 +47,7 @@ export default defineConfig({
         default: 'en-US',
         baseNavigator: false
     },
-    layout: {
-        title: pack.name.toString().toUpperCase(),
-        locale: true,
-        layout: 'side'
-    },
+    layout: false,
     routes,
     history: { type: 'hash' },
     scripts: [jqueryScriptUrl],

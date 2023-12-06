@@ -8,6 +8,7 @@
         "stylelint-declaration-block-no-ignored-properties"
     ],
     "rules": {
+        "at-rule-no-unknown": null,
         "declaration-empty-line-before": null,
         "no-descending-specificity": null,
         "selector-pseudo-class-no-unknown": null,

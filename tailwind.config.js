@@ -1,12 +1,13 @@
+/** @type {import('tailwindcss').Config} */
+
 module.exports = {
-    purge: ['./src/**/*.html', './src/**/*.ts', './src/**/*.tsx'],
-    content: [],
     theme: {
-        extend: {
-            zIndex: {
-                '-10': '-10'
-            }
-        }
+        extend: {}
     },
-    plugins: []
+    content: ['./src/**/*.html', './src/**/*.ts', './src/**/*.tsx'],
+    plugins: [],
+    corePlugins: {
+        container: false,
+        Preflight: false
+    }
 };

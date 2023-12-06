@@ -1,5 +1,8 @@
 const menuLocale = {
-    Welcome: 'Welcome'
+    Welcome: 'Welcome',
+    User: 'User',
+    UserHome: 'Home',
+    UserDetail: 'Detail'
 };
 
 export default Object.keys(menuLocale).reduce(

@@ -1,6 +1,5 @@
 import memoizeOne from 'memoize-one';
 import { equals } from 'ramda';
-import { getIntl } from '@umijs/max';
 
 // Conversion router to menu.
 function formatter(data, parentName) {
@@ -18,9 +17,13 @@ function formatter(data, parentName) {
             }
 
             const result = {
-                ...item,
-                name: getIntl().formatMessage({ id: locale, defaultMessage: item.name }),
-                locale
+                locale,
+                key: item.path,
+                icon: item.icon,
+                name: item.name,
+                path: item.path,
+                access: item.access,
+                routes: item.routes
             };
             if (item.routes) {
                 result.children = formatter(item.routes, item.authority, locale);
@@ -28,49 +31,48 @@ function formatter(data, parentName) {
             delete result.routes;
             return result;
         })
-        .filter((item) => item);
+        .filter(Boolean);
 }
 
 const memoizeOneFormatter = memoizeOne(formatter, equals);
 
-const getSubMenu = (item, access) => {
+const getSubMenu = (item) => {
     if (item.children && item.children.some((child) => child.name)) {
         return {
             ...item,
-            children: filterMenuData(item.children, access) // eslint-disable-line
+            children: filterMenuData(item.children) // eslint-disable-line
         };
     }
     return item;
 };
 
-const filterMenuData = (menuData, access) => {
-    if (!menuData) {
-        return [];
-    }
+const filterMenuData = (menuData) => {
+    if (!menuData) return [];
     return menuData
-        .filter((item) => item.name && !item.hideInMenu)
-        .map((item) => {
-            if (access[item.access]) return getSubMenu(item, access);
-            return null;
-        })
-        .filter((item) => item);
+        .filter((item) => typeof item.redirect === 'undefined')
+        .filter((item) => !item.hideInMenu)
+        .map(getSubMenu)
+        .filter(Boolean);
 };
 
 export default {
     namespace: 'menu',
     state: {
         routes: [],
-        menuData: [],
-        allMenuData: []
+        menuData: []
     },
     effects: {
-        *getMenuData(_, { payload }, { put, select }) {
-            const { access } = yield select(({ base }) => base);
-            const { routes } = payload;
-            const allMenuData = memoizeOneFormatter(routes);
-            const menuData = filterMenuData(allMenuData, access);
+        *getMenuData(_, { payload }, { put }) {
+            try {
+                const { routes } = payload;
+                yield put({ type: 'receive', payload: { routes } });
 
-            yield put({ type: 'receive', payload: { menuData, allMenuData } });
+                // 二者分开写，是为了避免在 getInitialProps 时，routes 还未更新
+                const [root] = filterMenuData(memoizeOneFormatter(routes));
+                yield put({ type: 'receive', payload: { menuData: root.children } });
+            } catch (error) {
+                console.log(error);
+            }
         }
     },
     reducers: {
@@ -79,16 +81,6 @@ export default {
                 ...state,
                 ...action.payload
             };
-        },
-        insertItemAt(state, { payload }) {
-            const { item, name } = payload;
-            const index = state.menuData.findIndex((i) => i.name === name);
-            if (index !== -1) state.menuData.splice(index + 1, 0, item);
-        },
-        removeItemByPath(state, { payload }) {
-            const { path } = payload;
-            const index = state.menuData.findIndex((i) => i.path === path);
-            if (index !== -1) state.menuData.splice(index, 1);
         }
     }
 };
