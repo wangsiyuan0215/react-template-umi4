@@ -24,3 +24,4 @@
 /ignore
 config/config.local*
 .mfsu
+.vscode
