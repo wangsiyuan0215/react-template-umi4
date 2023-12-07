@@ -1,6 +1,6 @@
 export default function Welcome() {
     return (
-        <div className="relative flex items-center h-full w-full sm:px-4 lg:px-0 bg-blue-50">
+        <div className="relative flex items-center w-full sm:px-4 lg:px-0 bg-blue-50">
             <div className="relative z-10 mx-auto max-w-2xl py-32">
                 <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                     <div className="relative rounded-full py-1 px-3 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">

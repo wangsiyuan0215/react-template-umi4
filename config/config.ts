@@ -1,18 +1,14 @@
-import { defineConfig } from '@umijs/max';
 import path from 'path';
+import { defineConfig } from '@umijs/max';
 
 import pack from '../package.json';
 import routes from '../src/routes';
-import svgoConfig from './svgo-config.json';
 
 const { UMI_ENV } = process.env;
 
 const isQa = UMI_ENV === 'qa';
 const isDev = UMI_ENV === 'develop';
 const isProd = UMI_ENV === 'prod';
-
-const iconPath = path.join(__dirname, '../', 'src/assets/icons');
-const jqueryScriptUrl = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js';
 
 export default defineConfig({
     dva: {
@@ -50,7 +46,6 @@ export default defineConfig({
     layout: false,
     routes,
     history: { type: 'hash' },
-    scripts: [jqueryScriptUrl],
     lessLoader: {
         javascriptEnabled: true
     },
@@ -64,26 +59,5 @@ export default defineConfig({
     chainWebpack: (config) => {
         config.resolve.modules.add(path.resolve(__dirname, '../src/resources'));
         config.resolve.extensions.add('less');
-        config.module.rule('svg').exclude.add(iconPath).end();
-        config.module
-            .rule('svg-sprite-loader')
-            .test(/\.svg(\?v=\d+\.\d+\.\d+)?$/)
-            .include.add(iconPath)
-            .end()
-            .use('svg')
-            .loader('svg-sprite-loader')
-            .options({
-                symbolId: 'icon-[name]'
-            });
-
-        config.module
-            .rule('svgo')
-            .test(/\.svg(\?v=\d+\.\d+\.\d+)?$/)
-            .include.add(iconPath)
-            .end()
-            .use('svgo')
-            .loader('file-loader')
-            .loader('svgo-loader')
-            .options(svgoConfig);
     }
 });
