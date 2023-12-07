@@ -2,11 +2,6 @@ import { getDvaApp } from '@umijs/max';
 
 import type { User } from '@/typings';
 
-/**
- * Define permission control information
- */
-// import welcome from '@/components/Welcome';
-
 export interface AccessType {
     canAccessSystem: boolean;
 }
@@ -27,7 +22,6 @@ export default function (initialState: [User & { $$access: AccessType }]): Acces
         // 同步 user 数据
         dva._store.dispatch({ type: 'user/receive', payload: user });
 
-        // welcome.unmount();
         return access;
     }
     return defaultAccess;

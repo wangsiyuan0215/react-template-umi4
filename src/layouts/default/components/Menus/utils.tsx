@@ -2,7 +2,7 @@ import Icon from '@ant-design/icons';
 import CustomIcon from '@/components/CustomIcon';
 
 import type { IntlShape } from 'react-intl';
-import type { RouteItem } from '@/routes/typing';
+import type { RouteItem } from '@/routes/typings';
 import type { AccessType } from '@/access';
 import type { MenuProps } from 'antd';
 
@@ -22,7 +22,12 @@ export const flatRoutes = (routes: RouteItem[], parent: RouteItem) => {
 };
 
 const generateIcon = (icon: string | React.ForwardRefExoticComponent<any>) => {
-    if (typeof icon === 'string') return <CustomIcon name={icon} className="!text-[12px] text-white" />;
+    if (typeof icon === 'string')
+        return (
+            <span className="flex items-center h-full">
+                <CustomIcon name={icon} className={`!text-[20px] ico-${icon}`} />
+            </span>
+        );
     return <Icon component={icon} />;
 };
 

@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 
-import styles from './index.less';
+import styles from './index.scss';
 
 export default () => {
     return (

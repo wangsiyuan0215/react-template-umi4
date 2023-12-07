@@ -55,7 +55,7 @@ export default defineConfig({
     extraBabelPlugins: ['@babel/plugin-proposal-optional-chaining'],
     ignoreMomentLocale: true,
     // eslint-disable-next-line import/no-extraneous-dependencies
-    extraPostCSSPlugins: [require('tailwindcss'), require('autoprefixer')],
+    // extraPostCSSPlugins: [require('tailwindcss'), require('autoprefixer')],
     chainWebpack: (config) => {
         config.resolve.modules.add(path.resolve(__dirname, '../src/resources'));
         config.resolve.extensions.add('less');

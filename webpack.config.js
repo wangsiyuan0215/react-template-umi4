@@ -17,8 +17,6 @@ module.exports = {
             services: require('path').resolve(__dirname, 'src/services'),
             resources: require('path').resolve(__dirname, 'src/resources'),
             components: require('path').resolve(__dirname, 'src/components'),
-            themes: require('path').resolve(__dirname, 'src/resources/themes'),
-            '_.less': require('path').resolve(__dirname, 'src/resources/_.less')
         },
         extensions: ['less', 'js', 'jsx', 'ts', 'tsx']
     },
@@ -27,6 +25,5 @@ module.exports = {
         require('path').resolve(__dirname, 'src'),
         require('path').resolve(__dirname, 'src/assets'),
         require('path').resolve(__dirname, 'src/resources'),
-        require('path').resolve(__dirname, 'src/resources/themes')
     ]
 };

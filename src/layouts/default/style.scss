@@ -1,0 +1,69 @@
+.menus {
+    :global {
+        .ant-menu-item-icon {
+            @apply h-full flex items-center #{!important};
+
+            .anticon {
+                @apply w-[20px] text-[20px] #{!important};
+            }
+
+            .ico-tips {
+                @apply mt-[-4px] #{!important};
+            }
+            .anticon-dashboard {
+                @apply mt-[-2px] #{!important};
+            }
+        }
+    }
+}
+
+:global {
+    .ant-menu-root > li {
+        @apply mb-2 #{!important};
+    }
+    .ant-menu-item,
+    .ant-menu-submenu-title {
+        transition: none !important;
+    }
+    .ant-menu-item .ant-menu-item-icon,
+    .ant-menu-submenu-title .ant-menu-item-icon,
+    .ant-menu-item .anticon,
+    .ant-menu-submenu-title .anticon {
+        @apply text-[20px] #{!important};
+    }
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-item,
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-item-group > .ant-menu-item-group-list > .ant-menu-item,
+    .ant-menu.ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-submenu
+        > .ant-menu-submenu-title,
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+        padding: 0 24px !important;
+    }
+
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-item .ant-menu-item-icon,
+    .ant-menu.ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-item
+        .ant-menu-item-icon,
+    .ant-menu.ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-submenu
+        > .ant-menu-submenu-title
+        .ant-menu-item-icon,
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .ant-menu-item-icon,
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-item .anticon,
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-item-group > .ant-menu-item-group-list > .ant-menu-item .anticon,
+    .ant-menu.ant-menu-inline-collapsed
+        > .ant-menu-item-group
+        > .ant-menu-item-group-list
+        > .ant-menu-submenu
+        > .ant-menu-submenu-title
+        .anticon,
+    .ant-menu.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title .anticon {
+        line-height: 0;
+    }
+}

@@ -1,11 +1,11 @@
-@import (reference) '~@/resources/_.less';
+@import '~@/resources/variables';
 
 .exception__container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: @white;
+    background-color: #fff;
 
     & > div {
         margin-top: -100px;
@@ -18,10 +18,10 @@
     .exception__title {
         width: 500px;
         margin: 10px 0 0;
-        color: @heading-color;
+        color: #333;
         font-weight: bold;
         font-size: 24px;
-        font-family: @font;
+        font-family: $font;
         line-height: 1.5;
         text-align: center;
 

@@ -1,4 +1,5 @@
 declare module '*.css';
+declare module '*.scss';
 declare module '*.less';
 declare module '*.png';
 declare module '*.jpg';
@@ -11,7 +12,7 @@ declare module '*.svg' {
 }
 
 declare module 'history' {
-    export interface Location {
+    export interface Location<S> {
         query: Record<string, unknown>;
     }
 }

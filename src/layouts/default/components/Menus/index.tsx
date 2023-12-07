@@ -7,7 +7,7 @@ import routes, { ROOT_ROUTE_NAME } from '@/routes';
 import { MenuItem, generateMenuItems, flatRoutes } from './utils';
 
 import type { MenuProps } from 'antd';
-import type { RouteItem } from '@/routes/typing';
+import type { RouteItem } from '@/routes/typings';
 
 type Props = {
     className: React.HTMLAttributes<InstanceType<typeof Menu>>['className'];
