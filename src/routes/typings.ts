@@ -12,7 +12,3 @@ export type RouteItem = {
     // 与路由配置无关的属性
     parent?: RouteItem;
 };
-
-export const defineRouteItem = (routeItem: RouteItem) => routeItem;
-
-export const defineRouteItems = (routeItems: RouteItem[]) => routeItems;

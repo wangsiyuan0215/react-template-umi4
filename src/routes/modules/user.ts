@@ -1,5 +1,5 @@
 import paths from '../paths';
-import { defineRouteItem } from '../typing';
+import { defineRouteItem } from '../utils';
 
 export default defineRouteItem({
     name: 'User',

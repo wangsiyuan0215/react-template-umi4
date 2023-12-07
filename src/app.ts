@@ -21,7 +21,7 @@ export async function getInitialState() {
     // welcome.render(document.querySelector('#root'));
     try {
         const [user] = await Promise.all([userApis.getUserInfo()]);
-        return [accessHelper(user), /* true for update quick setting and access */ true];
+        return [accessHelper(user)];
     } catch (e) {
         // welcome.unmount();
         return undefined;

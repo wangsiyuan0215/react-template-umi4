@@ -11,7 +11,7 @@ declare module '*.svg' {
 }
 
 declare module 'history' {
-    export interface Location<S> {
+    export interface Location {
         query: Record<string, unknown>;
     }
 }
@@ -25,27 +25,6 @@ declare module 'classnames' {
     function classNames(...args: ArgumentArray): string;
 
     export default classNames;
-}
-
-interface IBasicItem {
-    id: number | string;
-    [key: string]: any;
-}
-
-interface IByIdsItem<T> {
-    [key: string]: T;
-}
-
-declare interface IBasicIds<T extends IBasicItem> {
-    byId?: IByIdsItem<T>;
-    allIds?: (number | string)[];
-}
-
-declare interface IBasicResponse<T> {
-    data: T;
-    version: string;
-    reference: null | string;
-    timestamp: number;
 }
 
 declare namespace NodeJS {
@@ -66,3 +45,16 @@ declare const IS_DEV: boolean;
 declare const UMI_ENV: string;
 declare const IS_PROD: boolean;
 declare const APP_NAME: string;
+
+declare interface BasicModel<T extends object, N = string> {
+    namespace: N;
+    state: T;
+    subscriptions?: { setup: import('umi').Subscription } & Record<string, import('umi').Subscription>;
+    effects?: {
+        [key: string]: import('umi').Effect;
+    };
+    reducers?: {
+        receive?: import('umi').Reducer<T>;
+        [key: string]: import('umi').Reducer<T>;
+    };
+}

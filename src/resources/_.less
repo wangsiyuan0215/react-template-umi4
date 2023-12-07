@@ -1,86 +1,9 @@
 @import (reference) '~antd/lib/style/themes/default.less';
-@import (reference) 'default';
-
-/* z-index */
-@header-index: 100;
-@navigation-index: 99;
-
-// color, font-size, line-height
-.cfl (@color) {
-    color: @color;
-}
-.cfl (@color, @fs) {
-    color: @color;
-    font-size: @fs;
-}
-.cfl (@color, @fs, @lh) {
-    color: @color;
-    font-size: @fs;
-    line-height: @lh;
-}
+@import (reference) 'variables';
 
 .linear-gradient(@deg, @colorForm, @colorTo) {
     background-image: -webkit-linear-gradient(@deg, @colorForm, @colorTo);
     background-image: -moz-linear-gradient(@deg, @colorForm, @colorTo);
     background-image: -o-linear-gradient(@deg, @colorForm, @colorTo);
     background-image: linear-gradient(@deg, @colorForm, @colorTo);
-}
-
-.options-item-with-icon() {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    color: @label-color-000;
-    font-weight: 600;
-    font-size: 12px;
-    font-family: @font;
-    line-height: 16px;
-
-    & > svg {
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-        color: @label-color-000;
-        font-size: 24px;
-    }
-}
-
-.outline-card() {
-    background-color: #fff;
-    border: 1px solid transparent;
-    border-color: #edf3f8;
-    border-radius: 5px;
-}
-
-.scrollbar() {
-    &::-webkit-scrollbar {
-        width: 15px;
-        height: 15px;
-        background-color: inherit;
-        border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: #1c304d33;
-        background-clip: content-box;
-        border: 4px solid transparent;
-        border-radius: 15px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background-color: #9197ac;
-    }
-
-    &::-webkit-scrollbar-thumb:active,
-    &::-webkit-scrollbar-thumb:active {
-        background-color: #57606d;
-    }
-
-    &::-webkit-scrollbar-corner {
-        background-color: #0000001a;
-    }
 }

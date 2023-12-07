@@ -2,7 +2,7 @@ import { DashboardOutlined } from '@ant-design/icons';
 
 import paths from '../paths';
 
-import { defineRouteItem } from '../typing';
+import { defineRouteItem } from '../utils';
 
 export default defineRouteItem({
     icon: DashboardOutlined,

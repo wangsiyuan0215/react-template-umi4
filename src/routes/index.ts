@@ -3,7 +3,7 @@ import paths from './paths';
 import welcome from './modules/welcome';
 import user from './modules/user';
 
-import { defineRouteItems } from './typing';
+import { defineRouteItems } from './utils';
 
 export const ROOT_ROUTE_NAME = 'Root';
 

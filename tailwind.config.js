@@ -7,7 +7,6 @@ module.exports = {
     content: ['./src/**/*.html', './src/**/*.ts', './src/**/*.tsx'],
     plugins: [],
     corePlugins: {
-        container: false,
-        Preflight: false
+        container: false
     }
 };
