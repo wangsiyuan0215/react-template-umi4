@@ -6,8 +6,10 @@
         "build": "max build",
         "postinstall": "max setup",
         "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
-        "release:prod": "npx zx ./scripts/build.prod.mjs --quiet",
-        "release:qa": "npx zx ./scripts/build.stage.mjs --quiet",
+        "release:prod": "zx ./scripts/build.prod.mjs --quiet",
+        "release:prod-auto": "zx ./scripts/build.prod-auto.mjs --quiet",
+        "release:qa": "zx ./scripts/build.qa.mjs --quiet",
+        "release:qa-auto": "zx ./scripts/build.qa-auto.mjs --quiet",
         "start": "max dev",
         "test": "umi-test",
         "test:coverage": "umi-test --coverage"
